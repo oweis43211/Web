@@ -3,855 +3,1045 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بيوت مصر | أكبر منصة عقارية في مصر</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>HOME LAND | تسجيل الدخول</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ========== CSS Variables & Reset ========== */
         :root {
-            --primary-color: #1a5276;
-            --secondary-color: #d68910;
-            --accent-color: #28b463;
-            --light-color: #f8f9fa;
-            --dark-color: #2c3e50;
-            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --primary-color: #0a2d5e; /* أزرق داكن أنيق */
+            --secondary-color: #d4a762; /* ذهبي دافئ */
+            --accent-color: #2e7d5a; /* أخضر ازدهار */
+            --light-bg: #f8fafc;
+            --dark-text: #1e293b;
+            --light-text: #64748b;
+            --white: #ffffff;
+            --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 12px;
+            --section-padding: 4.5rem 2rem;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Cairo', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
-        
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
         .container {
-            max-width: 1200px;
+            width: 100%;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 1.5rem;
         }
-        
-        /* Header styles */
-        header {
-            background-color: white;
-            box-shadow: var(--shadow);
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 0.85rem 2.2rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), #1a4396);
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(10, 45, 94, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(10, 45, 94, 0.35);
+            background: linear-gradient(135deg, #1a4396, var(--primary-color));
+        }
+
+        /* ========== شاشة التسجيل ========== */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(10, 45, 94, 0.95), rgba(10, 45, 94, 0.98));
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .login-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .login-container {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 480px;
+            padding: 3rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .login-header h2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header h2 i {
+            color: var(--secondary-color);
+        }
+
+        .login-header p {
+            color: var(--light-text);
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition);
+            background-color: #f8fafc;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            background-color: var(--white);
+            box-shadow: 0 0 0 4px rgba(212, 167, 98, 0.15);
+        }
+
+        .form-group .input-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 3.2rem;
+            color: var(--light-text);
+        }
+
+        .password-toggle {
+            position: absolute;
+            left: 1.2rem;
+            top: 3.2rem;
+            background: none;
+            border: none;
+            color: var(--light-text);
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--light-text);
+        }
+
+        .forgot-password {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 1.1rem;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .login-divider {
+            text-align: center;
+            position: relative;
+            margin: 2rem 0;
+            color: var(--light-text);
+        }
+
+        .login-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 42%;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .login-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 42%;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            color: var(--light-text);
+        }
+
+        .register-link a {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-right: 5px;
+        }
+
+        .register-link a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* ========== الموقع الرئيسي (مخفي في البداية) ========== */
+        .main-website {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .main-website.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* ========== Header ========== */
+        .main-header {
+            background-color: var(--white);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             position: sticky;
             top: 0;
             z-index: 1000;
+            padding: 1rem 0;
         }
-        
-        .header-container {
+
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: var(--primary-color);
         }
-        
+
         .logo i {
-            color: var(--primary-color);
-            font-size: 28px;
+            color: var(--secondary-color);
         }
-        
-        .logo h1 {
-            color: var(--primary-color);
-            font-size: 24px;
-        }
-        
+
         .logo span {
             color: var(--secondary-color);
         }
-        
+
         .main-nav ul {
             display: flex;
-            list-style: none;
-            gap: 30px;
+            gap: 2.2rem;
         }
-        
+
         .main-nav a {
-            text-decoration: none;
-            color: var(--dark-color);
             font-weight: 600;
-            font-size: 16px;
-            transition: color 0.3s;
+            color: var(--dark-text);
+            position: relative;
+            padding: 0.5rem 0;
         }
-        
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            right: 0;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
         .main-nav a:hover {
             color: var(--primary-color);
         }
-        
-        .user-actions {
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        .user-menu {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 1rem;
         }
-        
-        .btn {
-            padding: 10px 20px;
-            border-radius: 5px;
+
+        .user-welcome {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            border: none;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
+            transition: var(--transition);
         }
-        
-        .btn-primary {
-            background-color: var(--primary-color);
+
+        .logout-btn:hover {
+            background: var(--primary-color);
             color: white;
         }
-        
-        .btn-primary:hover {
-            background-color: #154360;
-        }
-        
-        .btn-secondary {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-        
-        .btn-secondary:hover {
-            background-color: #b9770e;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-            border-radius: 0 0 20px 20px;
-            margin-bottom: 40px;
-        }
-        
-        .hero h2 {
-            font-size: 42px;
-            margin-bottom: 20px;
-        }
-        
-        .hero p {
-            font-size: 18px;
-            max-width: 700px;
-            margin: 0 auto 30px;
-        }
-        
-        .search-box {
-            background-color: white;
-            padding: 25px;
-            border-radius: 10px;
-            max-width: 900px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            box-shadow: var(--shadow);
-        }
-        
-        .search-input {
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        
-        .search-btn {
-            grid-column: span 1;
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .search-btn:hover {
-            background-color: #b9770e;
-        }
-        
-        /* Property Types Section */
+
+        /* ========== باقي أنماط الموقع ========== */
         .section-title {
             text-align: center;
-            margin-bottom: 40px;
-            color: var(--dark-color);
+            margin-bottom: 3.5rem;
             position: relative;
         }
-        
-        .section-title:after {
+
+        .section-title h2 {
+            font-size: 2.4rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .section-title h2::after {
             content: '';
             position: absolute;
             width: 80px;
-            height: 3px;
-            background-color: var(--secondary-color);
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
             bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
+            right: 50%;
+            transform: translateX(50%);
+            border-radius: 2px;
         }
-        
-        .property-types {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
-        }
-        
-        .type-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
+
+        .hero-section {
+            background: linear-gradient(rgba(10, 45, 94, 0.88), rgba(10, 45, 94, 0.92)), url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: var(--section-padding);
             text-align: center;
-            padding: 25px 15px;
         }
-        
-        .type-card:hover {
-            transform: translateY(-10px);
+
+        .hero-content {
+            max-width: 850px;
+            margin: 0 auto;
         }
-        
-        .type-card i {
-            font-size: 40px;
-            color: var(--primary-color);
-            margin-bottom: 15px;
+
+        .hero-content h1 {
+            font-size: 3.3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
         }
-        
-        .type-card h3 {
-            margin-bottom: 10px;
-            color: var(--dark-color);
+
+        .hero-content p {
+            font-size: 1.3rem;
+            opacity: 0.92;
+            margin-bottom: 2.8rem;
+            max-width: 700px;
+            margin-right: auto;
+            margin-left: auto;
         }
-        
-        /* Governorates Section */
-        .governorates {
-            margin-bottom: 60px;
+
+        .search-container {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--card-shadow);
+            margin-top: 3rem;
         }
-        
-        .gov-filter {
+
+        .search-filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-group {
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 30px;
+            flex-direction: column;
         }
-        
-        .gov-filter button {
-            padding: 8px 20px;
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .gov-filter button.active, .gov-filter button:hover {
-            background-color: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-        
-        .gov-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 25px;
-        }
-        
-        .gov-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
-        }
-        
-        .gov-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .gov-img {
-            height: 150px;
-            width: 100%;
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .gov-info {
-            padding: 20px;
-        }
-        
-        .gov-info h3 {
-            margin-bottom: 10px;
-            color: var(--dark-color);
-        }
-        
-        .gov-info p {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-        
-        /* Featured Properties */
-        .featured-properties {
-            margin-bottom: 60px;
-        }
-        
-        .properties-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .property-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
-        }
-        
-        .property-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .property-img {
-            height: 200px;
-            width: 100%;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-        
-        .property-type {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 3px;
-            font-size: 14px;
-        }
-        
-        .property-price {
-            position: absolute;
-            bottom: 15px;
-            left: 15px;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 3px;
+
+        .filter-group label {
+            font-size: 0.9rem;
             font-weight: 600;
-            font-size: 18px;
-        }
-        
-        .property-details {
-            padding: 20px;
-        }
-        
-        .property-details h3 {
-            margin-bottom: 10px;
-            color: var(--dark-color);
-        }
-        
-        .property-location {
-            color: #666;
-            margin-bottom: 15px;
-            font-size: 14px;
-        }
-        
-        .property-location i {
-            color: var(--secondary-color);
-            margin-left: 5px;
-        }
-        
-        .property-features {
-            display: flex;
-            justify-content: space-between;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .property-features span {
+            margin-bottom: 0.6rem;
+            color: var(--primary-color);
             display: flex;
             align-items: center;
             gap: 5px;
         }
-        
-        /* Innovative Features */
-        .innovative-features {
-            background-color: white;
-            padding: 60px 0;
-            border-radius: 20px;
-            margin-bottom: 60px;
-            box-shadow: var(--shadow);
+
+        .filter-group select,
+        .filter-group input {
+            padding: 0.95rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--white);
         }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+
+        .filter-group select:focus,
+        .filter-group input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(212, 167, 98, 0.15);
         }
-        
-        .feature-card {
-            text-align: center;
-            padding: 20px;
+
+        .search-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
         }
-        
-        .feature-card i {
-            font-size: 48px;
+
+        .btn-secondary {
+            background-color: transparent;
             color: var(--primary-color);
-            margin-bottom: 20px;
+            border: 2px solid var(--primary-color);
         }
-        
-        .feature-card h3 {
-            margin-bottom: 15px;
-            color: var(--dark-color);
+
+        .btn-secondary:hover {
+            background-color: rgba(10, 45, 94, 0.05);
+            transform: translateY(-2px);
         }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 60px 0 30px;
+
+        .featured-properties {
+            padding: var(--section-padding);
+            background-color: var(--white);
         }
-        
-        .footer-content {
+
+        .properties-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 2.2rem;
         }
-        
-        .footer-col h3 {
-            color: white;
-            margin-bottom: 20px;
-            font-size: 20px;
-            position: relative;
-            padding-bottom: 10px;
+
+        .property-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            border: 1px solid #f1f5f9;
         }
-        
-        .footer-col h3:after {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 2px;
-            background-color: var(--secondary-color);
-            bottom: 0;
-            right: 0;
+
+        .property-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
         }
-        
-        .footer-col ul {
-            list-style: none;
+
+        .property-img {
+            height: 220px;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
         }
-        
-        .footer-col ul li {
-            margin-bottom: 10px;
+
+        .property-card:hover .property-img {
+            transform: scale(1.05);
         }
-        
-        .footer-col a {
-            color: #ddd;
-            text-decoration: none;
-            transition: color 0.3s;
+
+        .property-content {
+            padding: 1.8rem;
         }
-        
-        .footer-col a:hover {
+
+        .property-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .property-header h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1.4;
+        }
+
+        .property-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            white-space: nowrap;
+        }
+
+        .property-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+            padding: 1.2rem 0;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+
+        .meta-item i {
             color: var(--secondary-color);
         }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #444;
-            color: #aaa;
-            font-size: 14px;
+
+        .property-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        
-        /* Responsive Design */
+
+        .property-type {
+            background-color: rgba(10, 45, 94, 0.08);
+            color: var(--primary-color);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .property-link {
+            color: var(--secondary-color);
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .property-link:hover {
+            gap: 10px;
+            color: var(--primary-color);
+        }
+
+        .main-footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .footer-column h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.8rem;
+            color: var(--secondary-color);
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.9rem;
+        }
+
+        .footer-column a {
+            opacity: 0.85;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-column a:hover {
+            opacity: 1;
+            color: var(--secondary-color);
+            transform: translateX(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        /* ========== Responsive ========== */
         @media (max-width: 768px) {
-            .header-container {
+            .login-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .login-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .form-options {
                 flex-direction: column;
-                gap: 15px;
+                gap: 1rem;
+                align-items: flex-start;
             }
             
-            .main-nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
+            .hero-content h1 {
+                font-size: 2.3rem;
             }
             
-            .hero h2 {
-                font-size: 32px;
+            .user-menu {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-end;
             }
             
-            .search-box {
-                grid-template-columns: 1fr;
+            .main-nav {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <div class="logo">
-                <i class="fas fa-home"></i>
-                <h1>بيوت <span>مصر</span></h1>
+    <!-- شاشة تسجيل الدخول -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-container">
+            <div class="login-header">
+                <h2><i class="fas fa-home"></i> HOME LAND</h2>
+                <p>سجل الدخول للوصول إلى أفضل العروض العقارية</p>
             </div>
             
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#home">الرئيسية</a></li>
-                    <li><a href="#properties">العقارات</a></li>
-                    <li><a href="#governorates">المحافظات</a></li>
-                    <li><a href="#types">الأنواع</a></li>
-                    <li><a href="#about">من نحن</a></li>
-                    <li><a href="#contact">اتصل بنا</a></li>
-                </ul>
-            </nav>
-            
-            <div class="user-actions">
-                <a href="#" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
-                <a href="#" class="btn btn-secondary"><i class="fas fa-plus"></i> أضف عقارك</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <h2>اكتشف أفضل العقارات في جميع محافظات مصر</h2>
-            <p>أكبر منصة عقارية في مصر تجمع بين البائع والمشتري مع ضمان الجودة والأمان في التعاملات</p>
-            
-            <div class="search-box">
-                <input type="text" class="search-input" placeholder="ابحث عن عقار (شقة، فيلا، أرض...)">
-                <select class="search-input">
-                    <option value="">جميع المحافظات</option>
-                    <option value="cairo">القاهرة</option>
-                    <option value="alex">الإسكندرية</option>
-                    <option value="giza">الجيزة</option>
-                    <option value="sharkia">الشرقية</option>
-                </select>
-                <select class="search-input">
-                    <option value="">جميع الأنواع</option>
-                    <option value="apartment">شقة</option>
-                    <option value="villa">فيلا</option>
-                    <option value="house">منزل</option>
-                    <option value="land">أرض</option>
-                </select>
-                <select class="search-input">
-                    <option value="">السعر</option>
-                    <option value="low">من الأقل للأعلى</option>
-                    <option value="high">من الأعلى للأقل</option>
-                </select>
-                <button class="search-btn"><i class="fas fa-search"></i> بحث متقدم</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Property Types Section -->
-    <section class="container" id="types">
-        <h2 class="section-title">أنواع العقارات</h2>
-        <div class="property-types">
-            <div class="type-card">
-                <i class="fas fa-building"></i>
-                <h3>شقق</h3>
-                <p>شقق للبيع أو للإيجار بجميع المساحات والمناطق</p>
-            </div>
-            
-            <div class="type-card">
-                <i class="fas fa-home"></i>
-                <h3>منازل</h3>
-                <p>منازل عائلية بأفضل المواقع والتصميمات</p>
-            </div>
-            
-            <div class="type-card">
-                <i class="fas fa-warehouse"></i>
-                <h3>فلل</h3>
-                <p>فلل فاخرة مع مساحات خضراء ومرافق متكاملة</p>
-            </div>
-            
-            <div class="type-card">
-                <i class="fas fa-vector-square"></i>
-                <h3>أراضي</h3>
-                <p>أراضي سكنية وتجارية وزراعية بجميع المحافظات</p>
-            </div>
-            
-            <div class="type-card">
-                <i class="fas fa-store"></i>
-                <h3>محلات تجارية</h3>
-                <p>محلات ومكاتب تجارية في أفضل المواقع</p>
-            </div>
-            
-            <div class="type-card">
-                <i class="fas fa-hotel"></i>
-                <h3>عقارات سياحية</h3>
-                <p>شاليهات وشقق فندقية في المدن الساحلية</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Governorates Section -->
-    <section class="container governorates" id="governorates">
-        <h2 class="section-title">عقارات حسب المحافظة</h2>
-        
-        <div class="gov-filter">
-            <button class="active" data-filter="all">الكل</button>
-            <button data-filter="north">شمال مصر</button>
-            <button data-filter="delta">الدلتا</button>
-            <button data-filter="cairo">القاهرة الكبرى</button>
-            <button data-filter="canal">قناة السويس</button>
-            <button data-filter="south">صعيد مصر</button>
-            <button data-filter="coastal">ساحلية</button>
-        </div>
-        
-        <div class="gov-grid">
-            <div class="gov-card" data-category="cairo">
-                <div class="gov-img" style="background-image: url('https://images.unsplash.com/photo-1572120360610-d971b9d7767c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
-                <div class="gov-info">
-                    <h3>القاهرة</h3>
-                    <p>عاصمة مصر وأكبر مدنها، بها أحدث المشروعات العقارية</p>
-                    <a href="#" class="btn btn-primary" style="padding: 8px 15px; font-size: 14px;">عرض العقارات</a>
-                </div>
-            </div>
-            
-            <div class="gov-card" data-category="coastal">
-                <div class="gov-img" style="background-image: url('https://images.unsplash.com/photo-1511733897353-5b04f82435a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
-                <div class="gov-info">
-                    <h3>الإسكندرية</h3>
-                    <p>عروس البحر المتوسط، عقارات ساحلية واستثمارية</p>
-                    <a href="#" class="btn btn-primary" style="padding: 8px 15px; font-size: 14px;">عرض العقارات</a>
-                </div>
-            </div>
-            
-            <div class="gov-card" data-category="cairo">
-                <div class="gov-img" style="background-image: url('https://images.unsplash.com/photo-1583417319070-4a69db38a482?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
-                <div class="gov-info">
-                    <h3>الجيزة</h3>
-                    <p>أهرامات الجيزة وأرقى الأحياء السكنية</p>
-                    <a href="#" class="btn btn-primary" style="padding: 8px 15px; font-size: 14px;">عرض العقارات</a>
-                </div>
-            </div>
-            
-            <div class="gov-card" data-category="delta">
-                <div class="gov-img" style="background-image: url('https://images.unsplash.com/photo-1615227961725-6d35b0cdbd15?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
-                <div class="gov-info">
-                    <h3>الغربية</h3>
-                    <p>قلب الدلتا، أراضي زراعية وعقارات مميزة</p>
-                    <a href="#" class="btn btn-primary" style="padding: 8px 15px; font-size: 14px;">عرض العقارات</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Properties -->
-    <section class="container featured-properties" id="properties">
-        <h2 class="section-title">عقارات مميزة</h2>
-        
-        <div class="properties-grid">
-            <div class="property-card">
-                <div class="property-img" style="background-image: url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-                    <span class="property-type">شقة</span>
-                    <span class="property-price">1,200,000 ج</span>
-                </div>
-                <div class="property-details">
-                    <h3>شقة فاخرة للبيع في الشيخ زايد</h3>
-                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> الشيخ زايد، الجيزة</p>
-                    <div class="property-features">
-                        <span><i class="fas fa-bed"></i> 3 غرف</span>
-                        <span><i class="fas fa-bath"></i> 2 حمام</span>
-                        <span><i class="fas fa-ruler-combined"></i> 150 م²</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="property-card">
-                <div class="property-img" style="background-image: url('https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-                    <span class="property-type">فيلا</span>
-                    <span class="property-price">4,500,000 ج</span>
-                </div>
-                <div class="property-details">
-                    <h3>فيلا فاخرة في كمبوند بالتجمع الخامس</h3>
-                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> التجمع الخامس، القاهرة</p>
-                    <div class="property-features">
-                        <span><i class="fas fa-bed"></i> 5 غرف</span>
-                        <span><i class="fas fa-bath"></i> 4 حمام</span>
-                        <span><i class="fas fa-ruler-combined"></i> 350 م²</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="property-card">
-                <div class="property-img" style="background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-                    <span class="property-type">أرض</span>
-                    <span class="property-price">800,000 ج</span>
-                </div>
-                <div class="property-details">
-                    <h3>أرض سكنية للبيع في العاصمة الإدارية</h3>
-                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> العاصمة الإدارية الجديدة</p>
-                    <div class="property-features">
-                        <span><i class="fas fa-ruler-combined"></i> 500 م²</span>
-                        <span><i class="fas fa-map"></i> سكني</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Innovative Features -->
-    <section class="innovative-features">
-        <div class="container">
-            <h2 class="section-title">مميزات مبتكرة في منصتنا</h2>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <i class="fas fa-vr-cardboard"></i>
-                    <h3>جولة افتراضية 360°</h3>
-                    <p>استكشف العقار من خلال جولة افتراضية كاملة قبل الزيارة</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
+                    <input type="email" id="email" placeholder="example@domain.com" required>
                 </div>
                 
-                <div class="feature-card">
-                    <i class="fas fa-handshake"></i>
-                    <h3>وسيط موثوق</h3>
-                    <p>وسيط عقاري معتمد يضمن سلامة التعاقد وحماية حقوق البائع والمشتري</p>
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> كلمة المرور</label>
+                    <input type="password" id="password" placeholder="أدخل كلمة المرور" required>
+                    <button type="button" class="password-toggle" id="togglePassword">
+                        <i class="far fa-eye"></i>
+                    </button>
                 </div>
                 
-                <div class="feature-card">
-                    <i class="fas fa-calculator"></i>
-                    <h3>حاسبة التمويل العقاري</h3>
-                    <p>حاسبة ذكية لحساب أقساط التمويل العقاري من مختلف البنوك</p>
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember">
+                        تذكرني
+                    </label>
+                    <a href="#" class="forgot-password">نسيت كلمة المرور؟</a>
                 </div>
                 
-                <div class="feature-card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>تحليل السوق العقاري</h3>
-                    <p>تقارير وتحليلات عن أسعار العقارات في مختلف المناطق</p>
-                </div>
+                <button type="submit" class="btn btn-primary login-btn">
+                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                </button>
                 
-                <div class="feature-card">
-                    <i class="fas fa-phone-alt"></i>
-                    <h3>استشارات مجانية</h3>
-                    <p>استشارات عقارية مجانية من خبراء في المجال</p>
-                </div>
+                <div class="login-divider">أو</div>
                 
-                <div class="feature-card">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>ضمان العقار</h3>
-                    <p>فحص وضمان جودة العقار قبل الشراء</p>
+                <div class="register-link">
+                    ليس لديك حساب؟ <a href="#" id="showRegister">سجل الآن مجاناً</a>
                 </div>
-            </div>
+            </form>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-col">
-                    <h3>بيوت مصر</h3>
-                    <p>أكبر منصة عقارية في مصر تقدم خدمات شاملة للبائع والمشتري والمستثمر في مجال العقارات.</p>
-                    <div class="social-icons" style="margin-top: 20px;">
-                        <a href="#" style="margin-left: 10px; font-size: 20px;"><i class="fab fa-facebook"></i></a>
-                        <a href="#" style="margin-left: 10px; font-size: 20px;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="margin-left: 10px; font-size: 20px;"><i class="fab fa-instagram"></i></a>
-                        <a href="#" style="margin-left: 10px; font-size: 20px;"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-col">
-                    <h3>روابط سريعة</h3>
+    <!-- الموقع الرئيسي (مخفي في البداية) -->
+    <div class="main-website" id="mainWebsite">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="container header-content">
+                <a href="#" class="logo">
+                    <i class="fas fa-home"></i>
+                    HOME<span>LAND</span>
+                </a>
+                <nav class="main-nav">
                     <ul>
-                        <li><a href="#home">الرئيسية</a></li>
-                        <li><a href="#properties">العقارات المميزة</a></li>
-                        <li><a href="#governorates">العقارات بالمحافظة</a></li>
-                        <li><a href="#types">أنواع العقارات</a></li>
-                        <li><a href="#about">من نحن</a></li>
+                        <li><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
+                        <li><a href="#"><i class="fas fa-building"></i> عقارات للبيع</a></li>
+                        <li><a href="#"><i class="fas fa-house-user"></i> عقارات للإيجار</a></li>
+                        <li><a href="#"><i class="fas fa-project-diagram"></i> المشاريع</a></li>
+                        <li><a href="#"><i class="fas fa-phone-alt"></i> اتصل بنا</a></li>
                     </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h3>المحافظات الرئيسية</h3>
-                    <ul>
-                        <li><a href="#">القاهرة</a></li>
-                        <li><a href="#">الجيزة</a></li>
-                        <li><a href="#">الإسكندرية</a></li>
-                        <li><a href="#">الغربية</a></li>
-                        <li><a href="#">الدقهلية</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h3>اتصل بنا</h3>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt" style="margin-left: 8px;"></i> القاهرة، مصر</li>
-                        <li><i class="fas fa-phone" style="margin-left: 8px;"></i> 01234567890</li>
-                        <li><i class="fas fa-envelope" style="margin-left: 8px;"></i> info@buyoutmisr.com</li>
-                    </ul>
+                </nav>
+                <div class="user-menu">
+                    <span class="user-welcome" id="userWelcome">مرحباً، محمد!</span>
+                    <button class="logout-btn" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                    </button>
                 </div>
             </div>
-            
-            <div class="copyright">
-                <p>جميع الحقوق محفوظة &copy; بيوت مصر 2023</p>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container hero-content">
+                <h1>مرحباً بك في HOME LAND</h1>
+                <p>تم تسجيل دخولك بنجاح. يمكنك الآن تصفح آلاف العروض العقارية الحصرية.</p>
+                <div class="search-container">
+                    <div class="search-filters">
+                        <div class="filter-group">
+                            <label for="city"><i class="fas fa-map-marker-alt"></i> المحافظة</label>
+                            <select id="city">
+                                <option>كل المحافظات</option>
+                                <option>القاهرة</option>
+                                <option>الجيزة</option>
+                                <option>الإسكندرية</option>
+                                <option>الغردقة</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="type"><i class="fas fa-tag"></i> نوع العقار</label>
+                            <select id="type">
+                                <option>اختر قسم...</option>
+                                <option>شقق للبيع</option>
+                                <option>شقق للإيجار</option>
+                                <option>أراضي</option>
+                                <option>فيلات</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="min-price"><i class="fas fa-coins"></i> السعر من (ج.م)</label>
+                            <input type="number" id="min-price" placeholder="أدنى سعر">
+                        </div>
+                        <div class="filter-group">
+                            <label for="max-price"><i class="fas fa-coins"></i> السعر إلى (ج.م)</label>
+                            <input type="number" id="max-price" placeholder="أعلى سعر">
+                        </div>
+                    </div>
+                    <div class="search-actions">
+                        <button class="btn btn-primary"><i class="fas fa-search"></i> بحث متقدم</button>
+                        <button class="btn btn-secondary"><i class="fas fa-redo"></i> مسح الفلاتر</button>
+                    </div>
+                </div>
             </div>
-        </div>
-    </footer>
+        </section>
+
+        <!-- Featured Properties -->
+        <section class="featured-properties">
+            <div class="container">
+                <div class="section-title">
+                    <h2>عروض مميزة تناسبك</h2>
+                    <p>أبرز الفرص العقارية المختارة بعناية</p>
+                </div>
+                <div class="properties-grid">
+                    <!-- Property 1 -->
+                    <article class="property-card">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="شقة فاخرة" class="property-img">
+                        <div class="property-content">
+                            <div class="property-header">
+                                <h3>شقة فاخرة للبيع في التجمع الخامس</h3>
+                                <div class="property-price">3,450,000 ج.م</div>
+                            </div>
+                            <p>شقة ٣ غرف بمساحة ١٦٠ م²، تشطيب سوبر لوكس، مطلوب عرب ٢٠٢٤.</p>
+                            <div class="property-meta">
+                                <div class="meta-item"><i class="fas fa-vector-square"></i> 160 م²</div>
+                                <div class="meta-item"><i class="fas fa-bed"></i> 3 غرف</div>
+                                <div class="meta-item"><i class="fas fa-bath"></i> 3 حمام</div>
+                                <div class="meta-item"><i class="fas fa-car"></i> جراج</div>
+                            </div>
+                            <div class="property-footer">
+                                <span class="property-type">شقة للبيع</span>
+                                <a href="#" class="property-link">عرض التفاصيل <i class="fas fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- Property 2 -->
+                    <article class="property-card">
+                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="فيلا" class="property-img">
+                        <div class="property-content">
+                            <div class="property-header">
+                                <h3>فيلا راقية في الساحل الشمالي</h3>
+                                <div class="property-price">8,900,000 ج.م</div>
+                            </div>
+                            <p>فيلا دوبلكس بمساحة ٣٠٠ م² على بعد ٥٠٠ م من البحر، حديقة خاصة وحمام سباحة.</p>
+                            <div class="property-meta">
+                                <div class="meta-item"><i class="fas fa-vector-square"></i> 300 م²</div>
+                                <div class="meta-item"><i class="fas fa-bed"></i> 5 غرف</div>
+                                <div class="meta-item"><i class="fas fa-bath"></i> 4 حمام</div>
+                                <div class="meta-item"><i class="fas fa-swimming-pool"></i> حمام سباحة</div>
+                            </div>
+                            <div class="property-footer">
+                                <span class="property-type">فيلا للبيع</span>
+                                <a href="#" class="property-link">عرض التفاصيل <i class="fas fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- Property 3 -->
+                    <article class="property-card">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="أرض" class="property-img">
+                        <div class="property-content">
+                            <div class="property-header">
+                                <h3>قطعة أرض سكنية في الشيخ زايد</h3>
+                                <div class="property-price">1,650,000 ج.م</div>
+                            </div>
+                            <p>قطعة أرض ٥٠٠ م² في منطقة سكنية هادئة، مرخصة للبناء فوراً، خدمات متكاملة.</p>
+                            <div class="property-meta">
+                                <div class="meta-item"><i class="fas fa-vector-square"></i> 500 م²</div>
+                                <div class="meta-item"><i class="fas fa-map"></i> شارع 20 م</div>
+                                <div class="meta-item"><i class="fas fa-tint"></i> صرف صحي</div>
+                                <div class="meta-item"><i class="fas fa-bolt"></i> كهرباء</div>
+                            </div>
+                            <div class="property-footer">
+                                <span class="property-type">أرض للبيع</span>
+                                <a href="#" class="property-link">عرض التفاصيل <i class="fas fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <h4>عن HOME LAND</h4>
+                        <p style="opacity: 0.85; margin-bottom: 1.5rem;">المنصة العقارية الرائدة التي تربط بين البائعين والمشترين بثقة وشفافية منذ 2023.</p>
+                    </div>
+                    <div class="footer-column">
+                        <h4>روابط سريعة</h4>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> الشروط والأحكام</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> سياسة الخصوصية</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> الأسئلة الشائعة</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>التصنيفات</h4>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> شقق للبيع في القاهرة</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> فلل للبيع في الجيزة</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> محلات للايجار</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>اتصل بنا</h4>
+                        <ul>
+                            <li><a href="tel:+20223456789"><i class="fas fa-phone"></i> 0020223456789+</a></li>
+                            <li><a href="mailto:info@home-land.com"><i class="fas fa-envelope"></i> info@home-land.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>© 2025 <strong>HOME LAND</strong>. جميع الحقوق محفوظة.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
 
     <script>
-        // فلتر المحافظات
-        document.querySelectorAll('.gov-filter button').forEach(button => {
-            button.addEventListener('click', function() {
-                // إزالة النشاط من جميع الأزرار
-                document.querySelectorAll('.gov-filter button').forEach(btn => {
-                    btn.classList.remove('active');
-                });
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginOverlay = document.getElementById('loginOverlay');
+            const mainWebsite = document.getElementById('mainWebsite');
+            const loginForm = document.getElementById('loginForm');
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const userWelcome = document.getElementById('userWelcome');
+            const showRegister = document.getElementById('showRegister');
+
+            // التحقق إذا كان المستخدم مسجل دخوله بالفعل (من localStorage)
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const savedUsername = localStorage.getItem('username');
+            
+            if (isLoggedIn === 'true' && savedUsername) {
+                loginOverlay.classList.add('hidden');
+                mainWebsite.classList.add('active');
+                userWelcome.textContent = `مرحباً، ${savedUsername}!`;
+            }
+
+            // زر إظهار/إخفاء كلمة المرور
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+            });
+
+            // تسجيل الدخول
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
                 
-                // إضافة النشاط للزر المضغوط
-                this.classList.add('active');
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const remember = document.getElementById('remember').checked;
                 
-                const filter = this.getAttribute('data-filter');
-                const govCards = document.querySelectorAll('.gov-card');
-                
-                if (filter === 'all') {
-                    govCards.forEach(card => {
-                        card.style.display = 'block';
-                    });
+                // محاكاة التحقق من بيانات الدخول (في الواقع ستكون طلب AJAX إلى الخادم)
+                if (email && password) {
+                    // استخراج اسم المستخدم من البريد الإلكتروني
+                    const username = email.split('@')[0];
+                    
+                    // حفظ حالة تسجيل الدخول
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('username', username);
+                    if (remember) {
+                        localStorage.setItem('rememberMe', 'true');
+                    }
+                    
+                    // عرض رسالة نجاح
+                    const submitBtn = loginForm.querySelector('.login-btn');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-check"></i> تم التسجيل بنجاح!';
+                    submitBtn.style.background = 'linear-gradient(135deg, #2e7d5e, #4caf50)';
+                    
+                    // الانتقال إلى الموقع بعد تأخير قصير
+                    setTimeout(() => {
+                        loginOverlay.classList.add('hidden');
+                        mainWebsite.classList.add('active');
+                        userWelcome.textContent = `مرحباً، ${username}!`;
+                    }, 1000);
+                    
+                    // إعادة الزر إلى حالته الأصلية بعد 2 ثانية
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.style.background = '';
+                    }, 2000);
                 } else {
-                    govCards.forEach(card => {
-                        if (card.getAttribute('data-category') === filter) {
-                            card.style.display = 'block';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
+                    alert('الرجاء إدخال البريد الإلكتروني وكلمة المرور');
                 }
             });
-        });
-        
-        // تأثيرات التمرير للنافذة
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
-            } else {
-                header.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.05)';
+
+            // رابط التسجيل (محاكاة)
+            showRegister.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('سيتم توجيهك إلى صفحة التسجيل. في الموقع الحقيقي، ستكون هذه صفحة منفصلة.');
+                // في الواقع: window.location.href = 'register.html';
+            });
+
+            // تسجيل الخروج
+            logoutBtn.addEventListener('click', function() {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('username');
+                
+                mainWebsite.classList.remove('active');
+                setTimeout(() => {
+                    loginOverlay.classList.remove('hidden');
+                    loginForm.reset();
+                }, 300);
+            });
+
+            // مسح فلاتر البحث
+            const clearFiltersBtn = document.querySelector('.btn-secondary');
+            if (clearFiltersBtn && clearFiltersBtn.textContent.includes('مسح الفلاتر')) {
+                clearFiltersBtn.addEventListener('click', function() {
+                    document.querySelectorAll('.search-filters select, .search-filters input').forEach(el => {
+                        if (el.tagName === 'SELECT') el.selectedIndex = 0;
+                        if (el.tagName === 'INPUT') el.value = '';
+                    });
+                });
             }
-        });
-        
-        // رسالة ترحيب عند تحميل الصفحة
-        window.addEventListener('load', function() {
-            console.log('مرحباً بك في موقع بيوت مصر - أكبر منصة عقارية في مصر');
         });
     </script>
 </body>
