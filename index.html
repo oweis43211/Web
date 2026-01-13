@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بيوت مصر | أكبر منصة عقارية في مصر</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a5276;
+            --secondary-color: #d68910;
+            --accent-color: #28b463;
+            --light-color: #f8f9fa;
+            --dark-color: #2c3e50;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Cairo', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            color: var(--primary-color);
+            font-size: 28px;
+        }
+        
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 24px;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .main-nav a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #154360;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #b9770e;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 40px;
+        }
+        
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .search-box {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            box-shadow: var(--shadow);
+        }
+        
+        .search-input {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .search-btn {
+            grid-column: span 1;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .search-btn:hover {
+            background-color: #b9770e;
+        }
+        
+        /* Property Types Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--dark-color);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .property-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+        
+        .type-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            text-align: center;
+            padding: 25px 15px;
+        }
+        
+        .type-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .type-card i {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .type-card h3 {
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        /* Governorates Section */
+        .governorates {
+            margin-bottom: 60px;
+        }
+        
+        .gov-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .gov-filter button {
+            padding: 8px 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .gov-filter button.active, .gov-filter button:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .gov-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .gov-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .gov-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gov-img {
+            height: 150px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .gov-info {
+            padding: 20px;
+        }
+        
+        .gov-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        .gov-info p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        /* Featured Properties */
+        .featured-properties {
+            margin-bottom: 60px;
+        }
+        
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .property-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .property-img {
+            height: 200px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .property-type {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        
+        .property-price {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .property-details {
+            padding: 20px;
+        }
+        
+        .property-details h3 {
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        .property-location {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .property-location i {
+            color: var(--secondary-color);
+            margin-left: 5px;
+        }
+        
+        .property-features {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .property-features span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Innovative Features */
+        .innovative-features {
+            background-color: white;
+            padding: 60px 0;
+            border-radius: 20px;
+            margin-bottom: 60px;
+            box-shadow: var(--shadow);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .feature-card i {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            right: 0;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .main-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 32px;
+            }
+            
+            .search-box {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-home"></i>
+                <h1>بيوت <span>مصر</span></h1>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#properties">العقارات</a></li>
+                    <li><a href="#governorates">المحافظات</a></li>
+                    <li><a href="#types">الأنواع</a></li>
+                    <li><a href="#about">من نحن</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="#" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                <a href="#" class="btn btn-secondary"><i class="fas fa-plus"></i> أضف عقارك</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>اكتشف أفضل العقارات في جميع محافظات مصر</h2>
+            <p>أكبر منصة عقارية في مصر تجمع بين البائع والمشتري مع ضمان الجودة والأمان في التعاملات</p>
+            
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="ابحث عن عقار (شقة، فيلا، أرض...)">
+                <select class="search-input">
+                    <option value="">جميع المحافظات</option>
+                    <option value="cairo">القاهرة</option>
+                    <option value="alex">الإسكندرية</option>
+                    <option value="giza">الجيزة</option>
+                    <option value="sharkia">الشرقية</option>
+                </select>
+                <select class="search-input">
+                    <option value="">جميع الأنواع</option>
+                    <option value="apartment">شقة</option>
+                    <option value="villa">فيلا</option>
+                    <option value="house">منزل</option>
+                    <option value="land">أرض</option>
+                </select>
+                <select class="search-input">
+                    <option value="">السعر</option>
+                    <option value="low">من الأقل للأعلى</option>
+                    <option value="high">من الأعلى للأقل</option>
+                </select>
+                <button class="search-btn"><i class="fas fa-search"></i> بحث متقدم</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Property Types Section -->
+    <section class="container" id="types">
+        <h2 class="section-title">أنواع العقارات</h2>
+        <div class="property-types">
+            <div class="type-card">
+                <i class="fas fa-building"></i>
+                <h3>شقق</h3>
+                <p>شقق للبيع أو للإيجار بجميع المساحات والمناطق</p>
+            </div>
+            
+            <div class="type-card">
+                <i class="fas fa-home"></i>
+                <h3>منازل</h3>
+                <p>منازل عائلية بأفضل المواقع والتصميمات</p>
+            </div>
+            
+            <div class="type-card">
+                <i class="fas fa-warehouse"></i>
+                <h3>فلل</h3>
+                <p>فلل فاخرة مع مساحات خضراء ومرافق متكاملة</p>
+            </div>
+            
+            <div class="type-card">
+                <i class="fas fa-vector-square"></i>
+                <h3>أراضي</h3>
+                <p>أراضي سكنية وتجارية وزراعية بجميع المحافظات</p>
+            </div>
+            
+            <div class="type-card">
+                <i class="fas fa-store"></i>
+                <h3>محلات تجارية</h3>
+                <p>محلات ومكاتب تجارية في أفضل المواقع</p>
+            </div>
+            
+            <div class="type-card">
+                <i class="fas fa-hotel"></i>
+                <h3>عقارات سياحية</h3>
+                <p>شاليهات وشقق فندقية في المدن الساحلية</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Governorates Section -->
+    <section class="container governorates" id="governorates">
+        <h2 class="section-title">عقارات حسب المحافظة</h2>
+        
+        <div class="gov-filter">
+            <button class="active" data-filter="all">الكل</button>
+            <button data-filter="north">شمال مصر</button>
+            <button data-filter="delta">الدلتا</button>
+            <button data-filter="cairo">القاهرة الكبرى</button>
+            <button data-filter="canal">قناة السويس</button>
+            <button data-filter="south">صعيد مصر</button>
+            <button data-filter="coastal">ساحلية</button>
+        </div>
+        
+        <div class="gov-grid">
+            <div class="gov-card" data-category="cairo">
+                <div class="gov-img" style="background-image: url('https://images.unsplash.com/photo-1572120360610-d971b9d7767c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="gov-info">
+                    <h3>القاهرة</h3>
+                    <p>عاصمة مصر وأكبر مدنها، بها أحدث المشروعات العقارية</p>
+                    <a href="#" class="btn btn-primary" style="padding: 8px 15px; font-size: 14px;">عرض العقارات</a>
+                </div>
+            </div>
+            
+            <div class="gov-card" data-category="coastal">
+                <div class="gov-img" style="background-image: url('https://images.unsplash.com/photo-1511733897353-5b04f82435a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="gov-info">
+                    <h3>الإسكندرية</h3>
+                    <p>عروس البحر المتوسط، عقارات ساحلية واستثمارية</p>
+                    <a href="#" class="btn btn-primary" style="padding: 8px 15px; font-size: 14px;">عرض العقارات</a>
+                </div>
+            </div>
+            
+            <div class="gov-card" data-category="cairo">
+                <div class="gov-img" style="background-image: url('https://images.unsplash.com/photo-1583417319070-4a69db38a482?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="gov-info">
+                    <h3>الجيزة</h3>
+                    <p>أهرامات الجيزة وأرقى الأحياء السكنية</p>
+                    <a href="#" class="btn btn-primary" style="padding: 8px 15px; font-size: 14px;">عرض العقارات</a>
+                </div>
+            </div>
+            
+            <div class="gov-card" data-category="delta">
+                <div class="gov-img" style="background-image: url('https://images.unsplash.com/photo-1615227961725-6d35b0cdbd15?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="gov-info">
+                    <h3>الغربية</h3>
+                    <p>قلب الدلتا، أراضي زراعية وعقارات مميزة</p>
+                    <a href="#" class="btn btn-primary" style="padding: 8px 15px; font-size: 14px;">عرض العقارات</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Properties -->
+    <section class="container featured-properties" id="properties">
+        <h2 class="section-title">عقارات مميزة</h2>
+        
+        <div class="properties-grid">
+            <div class="property-card">
+                <div class="property-img" style="background-image: url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                    <span class="property-type">شقة</span>
+                    <span class="property-price">1,200,000 ج</span>
+                </div>
+                <div class="property-details">
+                    <h3>شقة فاخرة للبيع في الشيخ زايد</h3>
+                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> الشيخ زايد، الجيزة</p>
+                    <div class="property-features">
+                        <span><i class="fas fa-bed"></i> 3 غرف</span>
+                        <span><i class="fas fa-bath"></i> 2 حمام</span>
+                        <span><i class="fas fa-ruler-combined"></i> 150 م²</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="property-card">
+                <div class="property-img" style="background-image: url('https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                    <span class="property-type">فيلا</span>
+                    <span class="property-price">4,500,000 ج</span>
+                </div>
+                <div class="property-details">
+                    <h3>فيلا فاخرة في كمبوند بالتجمع الخامس</h3>
+                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> التجمع الخامس، القاهرة</p>
+                    <div class="property-features">
+                        <span><i class="fas fa-bed"></i> 5 غرف</span>
+                        <span><i class="fas fa-bath"></i> 4 حمام</span>
+                        <span><i class="fas fa-ruler-combined"></i> 350 م²</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="property-card">
+                <div class="property-img" style="background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                    <span class="property-type">أرض</span>
+                    <span class="property-price">800,000 ج</span>
+                </div>
+                <div class="property-details">
+                    <h3>أرض سكنية للبيع في العاصمة الإدارية</h3>
+                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> العاصمة الإدارية الجديدة</p>
+                    <div class="property-features">
+                        <span><i class="fas fa-ruler-combined"></i> 500 م²</span>
+                        <span><i class="fas fa-map"></i> سكني</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Innovative Features -->
+    <section class="innovative-features">
+        <div class="container">
+            <h2 class="section-title">مميزات مبتكرة في منصتنا</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-vr-cardboard"></i>
+                    <h3>جولة افتراضية 360°</h3>
+                    <p>استكشف العقار من خلال جولة افتراضية كاملة قبل الزيارة</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3>وسيط موثوق</h3>
+                    <p>وسيط عقاري معتمد يضمن سلامة التعاقد وحماية حقوق البائع والمشتري</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-calculator"></i>
+                    <h3>حاسبة التمويل العقاري</h3>
+                    <p>حاسبة ذكية لحساب أقساط التمويل العقاري من مختلف البنوك</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>تحليل السوق العقاري</h3>
+                    <p>تقارير وتحليلات عن أسعار العقارات في مختلف المناطق</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>استشارات مجانية</h3>
+                    <p>استشارات عقارية مجانية من خبراء في المجال</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>ضمان العقار</h3>
+                    <p>فحص وضمان جودة العقار قبل الشراء</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>بيوت مصر</h3>
+                    <p>أكبر منصة عقارية في مصر تقدم خدمات شاملة للبائع والمشتري والمستثمر في مجال العقارات.</p>
+                    <div class="social-icons" style="margin-top: 20px;">
+                        <a href="#" style="margin-left: 10px; font-size: 20px;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="margin-left: 10px; font-size: 20px;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="margin-left: 10px; font-size: 20px;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="margin-left: 10px; font-size: 20px;"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#properties">العقارات المميزة</a></li>
+                        <li><a href="#governorates">العقارات بالمحافظة</a></li>
+                        <li><a href="#types">أنواع العقارات</a></li>
+                        <li><a href="#about">من نحن</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>المحافظات الرئيسية</h3>
+                    <ul>
+                        <li><a href="#">القاهرة</a></li>
+                        <li><a href="#">الجيزة</a></li>
+                        <li><a href="#">الإسكندرية</a></li>
+                        <li><a href="#">الغربية</a></li>
+                        <li><a href="#">الدقهلية</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>اتصل بنا</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt" style="margin-left: 8px;"></i> القاهرة، مصر</li>
+                        <li><i class="fas fa-phone" style="margin-left: 8px;"></i> 01234567890</li>
+                        <li><i class="fas fa-envelope" style="margin-left: 8px;"></i> info@buyoutmisr.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; بيوت مصر 2023</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // فلتر المحافظات
+        document.querySelectorAll('.gov-filter button').forEach(button => {
+            button.addEventListener('click', function() {
+                // إزالة النشاط من جميع الأزرار
+                document.querySelectorAll('.gov-filter button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // إضافة النشاط للزر المضغوط
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                const govCards = document.querySelectorAll('.gov-card');
+                
+                if (filter === 'all') {
+                    govCards.forEach(card => {
+                        card.style.display = 'block';
+                    });
+                } else {
+                    govCards.forEach(card => {
+                        if (card.getAttribute('data-category') === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+        
+        // تأثيرات التمرير للنافذة
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.05)';
+            }
+        });
+        
+        // رسالة ترحيب عند تحميل الصفحة
+        window.addEventListener('load', function() {
+            console.log('مرحباً بك في موقع بيوت مصر - أكبر منصة عقارية في مصر');
+        });
+    </script>
+</body>
+</html>
