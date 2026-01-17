@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME LAND | الطروحات</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0a2d5e;
+            --secondary-color: #d4a762;
+            --accent-color: #2e7d5a;
+            --light-bg: #f8fafc;
+            --dark-text: #1e293b;
+            --light-text: #64748b;
+            --white: #ffffff;
+            --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* الهيدر */
+        .main-header {
+            background-color: var(--white);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .logo-img {
+            height: 80px;
+            width: 150px;
+            margin-left: 30px;
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 1.8rem;
+        }
+
+        .main-nav a {
+            font-weight: 600;
+            color: var(--dark-text);
+            position: relative;
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            right: 0;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        /* قسم اختيار نوع العقار */
+        .property-type-section {
+            padding: 4.5rem 2rem;
+            text-align: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.4rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            border-radius: 2px;
+        }
+
+        .property-type-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .property-type-btn {
+            width: 250px;
+            height: 250px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: var(--white);
+            transition: var(--transition);
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .property-type-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .property-type-btn:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .property-type-btn.houses {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .property-type-btn.lands {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .property-type-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            z-index: 2;
+        }
+
+        .property-type-btn h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            z-index: 2;
+        }
+
+        .property-type-btn p {
+            font-size: 1rem;
+            opacity: 0.9;
+            z-index: 2;
+            padding: 0 1rem;
+        }
+
+        /* عرض العروض */
+        .offers-section {
+            padding: 3rem 2rem;
+            background-color: var(--light-bg);
+        }
+
+        .offers-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .offers-filter {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .add-offer-btn {
+            background: linear-gradient(135deg, var(--primary-color), #1a4396);
+            color: var(--white);
+            border: none;
+            padding: 0.85rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .add-offer-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(10, 45, 94, 0.35);
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .offer-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            border: 1px solid #f1f5f9;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .offer-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .offer-badge.house {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .offer-badge.land {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .offer-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            position: relative;
+        }
+
+        .offer-content {
+            padding: 1.5rem;
+        }
+
+        .offer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .offer-header h3 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .offer-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            white-space: nowrap;
+        }
+
+        .offer-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1.5rem 0;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .detail-item i {
+            color: var(--secondary-color);
+            width: 20px;
+        }
+
+        .offer-excellence {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #000;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .offer-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .offer-location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        .offer-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: var(--light-bg);
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 5rem 2rem;
+            grid-column: 1 / -1;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .empty-state h3 {
+            font-size: 1.8rem;
+            color: var(--dark-text);
+            margin-bottom: 1rem;
+        }
+
+        .empty-state p {
+            color: var(--light-text);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* زر العودة للرئيسية */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 2rem;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            background: #1a4396;
+            transform: translateY(-2px);
+        }
+
+        /* الفوتر */
+        .main-footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .footer-column h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.8rem;
+            color: var(--secondary-color);
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.9rem;
+        }
+
+        .footer-column a {
+            opacity: 0.85;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .footer-column a:hover {
+            opacity: 1;
+            color: var(--secondary-color);
+            transform: translateX(-5px);
+            text-decoration: none;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .property-type-btn {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .offers-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .offers-filter {
+                justify-content: center;
+            }
+            
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-nav ul {
+                display: flex;
+                gap: 1.8rem;
+            }
+
+            .main-nav a {
+                font-weight: 600;
+                color: var(--dark-text);
+                position: relative;
+                padding: 0.5rem 0;
+                font-size: 0.95rem;
+                white-space: nowrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .property-type-btn {
+                width: 160px;
+                height: 160px;
+            }
+            
+            .property-type-icon {
+                font-size: 3rem;
+            }
+            
+            .property-type-btn h3 {
+                font-size: 1.4rem;
+            }
+        }
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-welcome {
+            font-weight: 600;
+            color: var(--primary-color);
+            padding: 15px 10px 10px;
+        }
+
+        .login-header-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .login-header-btn:hover {
+            background: #1a4396;
+            transform: translateY(-2px);
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .logout-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            right: 0;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        } 
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header class="main-header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="HOME LAND Logo" class="logo-img">
+            </a>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
+                        <li><a href="#"><i class="fas fa-user-tie"></i> المديرين</a></li>
+                        <li><a href="#"><i class="fas fa-bullhorn"></i> الرعاية والإعلانات</a></li>
+                        <li><a href="#"><i class="fas fa-map-marked-alt"></i> خريطة الموقع</a></li>
+                        <li><a href="#"><i class="fas fa-plus-circle"></i> أضف عقارك</a></li>
+                        <li><a href="#"><i class="fas fa-money-bill-wave"></i> حوالات</a></li>
+                        <li><a href="offers.html"><i class="fas fa-rocket"></i> طروحات</a></li>
+                    </ul>
+                </nav>
+            <div class="user-menu">
+                <span class="user-welcome" id="userWelcome">مرحباً بك في HOME LAND</span>
+                <button class="login-header-btn" id="loginHeaderBtn">
+                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                </button>
+                <button class="logout-btn" id="logoutBtn" style="display: none;">
+                    <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                </button>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- اختيار نوع العقار -->
+    <section class="property-type-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>اختر نوع العقار</h2>
+                <p>قم باختيار نوع العقار الذي ترغب في إضافته للطروحات</p>
+            </div>
+            <div class="property-type-buttons">
+                <a href="add-house.html" class="property-type-btn houses">
+                    <i class="fas fa-building property-type-icon"></i>
+                    <h3>شقق ومنازل</h3>
+                    <p>إضافة عروض للشقق والمنازل</p>
+                </a>
+                <a href="add-land.html" class="property-type-btn lands">
+                    <i class="fas fa-mountain property-type-icon"></i>
+                    <h3>أراضي</h3>
+                    <p>إضافة عروض للأراضي</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- عرض جميع العروض -->
+    <section class="offers-section" id="all-offers">
+        <div class="container">
+            <div class="offers-header">
+                <div class="section-title" style="text-align: right; margin-bottom: 0;">
+                    <h2>جميع العروض</h2>
+                </div>
+                
+                <div class="offers-filter">
+                    <button class="filter-btn active" onclick="filterOffers('all')">الكل</button>
+                    <button class="filter-btn" onclick="filterOffers('house')">شقق ومنازل</button>
+                    <button class="filter-btn" onclick="filterOffers('land')">أراضي</button>
+                </div>
+                
+                <button class="add-offer-btn" onclick="window.location.href='#property-type-section'">
+                    <i class="fas fa-plus"></i> إضافة عرض جديد
+                </button>
+            </div>
+            
+            <div class="offers-grid" id="offersGrid">
+                <!-- سيتم ملء العروض هنا بواسطة JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>عن HOME LAND</h4>
+                    <p style="opacity: 0.85; margin-bottom: 1.5rem;">المنصة العقارية الرائدة التي تربط بين البائعين والمشترين بثقة وشفافية منذ 2023.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> الشروط والأحكام</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> سياسة الخصوصية</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> الأسئلة الشائعة</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>التصنيفات</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> شقق للبيع في القاهرة</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> فلل للبيع في الجيزة</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> محلات للايجار</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>اتصل بنا</h4>
+                    <ul>
+                        <li>
+                        <a href="https://wa.me/201119991216?text=مرحباً، أريد الاستفسار عن الخدمات التي تقدمونها" target="_blank">
+                            <i class="fas fa-phone"></i>01119991216
+                        </a>
+                        </li>                       
+                        <li>
+                        <a href="https://wa.me/201009718777" target="_blank">
+                            <i class="fas fa-phone"></i>01009718777
+                        </a>
+                        </li>  
+                        <li><a href="mailto:home-land@email.com"><i class="fas fa-envelope"></i>home-land@email.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 <strong>HOME LAND</strong>. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // قاعدة البيانات المحلية
+        const DB_NAME = 'realEstateOffersDB';
+        
+        // تهيئة قاعدة البيانات
+        function initDatabase() {
+            if (!localStorage.getItem(DB_NAME)) {
+                localStorage.setItem(DB_NAME, JSON.stringify([]));
+            }
+        }
+        
+        // حفظ عرض جديد
+        function saveOffer(offer) {
+            initDatabase();
+            const db = JSON.parse(localStorage.getItem(DB_NAME));
+            db.push(offer);
+            localStorage.setItem(DB_NAME, JSON.stringify(db));
+            return true;
+        }
+        
+        // جلب جميع العروض
+        function getAllOffers() {
+            initDatabase();
+            return JSON.parse(localStorage.getItem(DB_NAME)) || [];
+        }
+        
+        // جلب العروض حسب النوع
+        function getOffersByType(type) {
+            const allOffers = getAllOffers();
+            if (type === 'all') return allOffers;
+            return allOffers.filter(offer => offer.type === type);
+        }
+        
+        // عرض العروض في الصفحة
+        function displayOffers(type = 'all') {
+            const offers = getOffersByType(type);
+            const grid = document.getElementById('offersGrid');
+            
+            if (!grid) return;
+            
+            if (offers.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-home"></i>
+                        <h3>لا توجد عروض حالياً</h3>
+                        <p>كن أول من يضيف عرضاً للطروحات الجديدة</p>
+                        <a href="#" onclick="window.location.href='#property-type-section'" class="add-offer-btn">
+                            <i class="fas fa-plus"></i> إضافة عرض جديد
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+            
+            grid.innerHTML = '';
+            
+            offers.forEach(offer => {
+                const isHouse = offer.type === 'house';
+                const icon = isHouse ? 'fa-building' : 'fa-mountain';
+                const typeText = isHouse ? 'شقة/منزل' : 'أرض';
+                const badgeClass = isHouse ? 'house' : 'land';
+                
+                // تنسيق السعر
+                const formattedOffer = new Intl.NumberFormat('ar-EG').format(offer.offer) + ' ج.م';
+                const paidAmount = new Intl.NumberFormat('ar-EG').format(offer.paidAmount);
+                const paidCurrency = offer.paidCurrency === 'USD' ? '$' : 'ج.م';
+                
+                // إنشاء بطاقة العرض
+                const card = document.createElement('div');
+                card.className = 'offer-card';
+                card.innerHTML = `
+                    <div class="offer-badge ${badgeClass}">
+                        ${typeText}
+                    </div>
+                    <img src="${offer.image || 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}" 
+                         alt="${typeText}" class="offer-img">
+                    <div class="offer-content">
+                        <div class="offer-header">
+                            <h3>${typeText} في ${offer.district || offer.neighborhood}</h3>
+                            <div class="offer-price">${formattedOffer}</div>
+                        </div>
+                        
+                        <div class="offer-excellence">
+                            نسبة التميز: ${offer.excellence}%
+                        </div>
+                        
+                        <div class="offer-details">
+                            ${isHouse ? `
+                                <div class="detail-item">
+                                    <i class="fas fa-expand-arrows-alt"></i>
+                                    <span>المساحة: ${offer.area} م²</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-bath"></i>
+                                    <span>الحمامات: ${offer.bathrooms}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-couch"></i>
+                                    <span>الريسبشن: ${offer.reception}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-money-bill"></i>
+                                    <span>المدفوع: ${paidAmount} ${paidCurrency}</span>
+                                </div>
+                            ` : `
+                                <div class="detail-item">
+                                    <i class="fas fa-expand-arrows-alt"></i>
+                                    <span>المساحة: ${offer.area} م²</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>الحي: ${offer.district}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map-pin"></i>
+                                    <span>المجاورة: ${offer.neighborhood}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-money-bill"></i>
+                                    <span>المدفوع: ${paidAmount} ${paidCurrency}</span>
+                                </div>
+                            `}
+                        </div>
+                        
+                        <div class="offer-footer">
+                            <div class="offer-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>${offer.governorate}</span>
+                            </div>
+                            <div class="offer-actions">
+                                <button class="action-btn" onclick="viewOffer(${offer.id})" title="عرض التفاصيل">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="editOffer(${offer.id})" title="تعديل">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="action-btn" onclick="deleteOffer(${offer.id})" title="حذف">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+        
+        // تصفية العروض
+        function filterOffers(type) {
+            // تحديد الأزرار النشطة
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // عرض العروض حسب النوع
+            displayOffers(type);
+        }
+        
+        // حذف عرض
+        function deleteOffer(id) {
+            if (confirm('هل أنت متأكد من حذف هذا العرض؟')) {
+                const db = JSON.parse(localStorage.getItem(DB_NAME));
+                const updatedDb = db.filter(offer => offer.id !== id);
+                localStorage.setItem(DB_NAME, JSON.stringify(updatedDb));
+                displayOffers('all');
+            }
+        }
+
+        // حماية الوظائف التي تتطلب تسجيل دخول
+        function protectFunction(callback) {
+            if (window.authSystem && window.authSystem.isLoggedIn()) {
+                callback();
+            } else {
+                alert('يرجى تسجيل الدخول للوصول إلى هذه الميزة');
+                if (window.authSystem) {
+                    window.authSystem.showLoginModal();
+                }
+                // حفظ الصفحة الحالية للعودة إليها بعد تسجيل الدخول
+                localStorage.setItem('redirectAfterLogin', window.location.href);
+            }
+        }
+
+        // استخدام المثال:
+        document.querySelector('.add-offer-btn')?.addEventListener('click', function() {
+            protectFunction(function() {
+                // الكود الذي يتطلب تسجيل دخول
+                window.location.href = 'add-house.html';
+            });
+        });
+        
+        // عرض تفاصيل العرض (يمكن تطويره)
+        function viewOffer(id) {
+            const db = JSON.parse(localStorage.getItem(DB_NAME));
+            const offer = db.find(o => o.id === id);
+            if (offer) {
+                alert(`
+                    تفاصيل العرض:
+                    
+                    النوع: ${offer.type === 'house' ? 'شقة/منزل' : 'أرض'}
+                    المحافظة: ${offer.governorate}
+                    ${offer.type === 'house' ? `الحي: ${offer.district}` : `المجاورة: ${offer.neighborhood}`}
+                    المساحة: ${offer.area} م²
+                    نسبة التميز: ${offer.excellence}%
+                    المدفوع: ${offer.paidAmount} ${offer.paidCurrency}
+                    السعر النهائي: ${new Intl.NumberFormat('ar-EG').format(offer.offer)} ج.م
+                    ${offer.type === 'house' ? `عدد الحمامات: ${offer.bathrooms}` : ''}
+                    ${offer.type === 'house' ? `عدد الريسبشن: ${offer.reception}` : ''}
+                    ${offer.additionalInfo ? `معلومات إضافية: ${offer.additionalInfo}` : ''}
+                `);
+            }
+        }
+        
+        // تحميل العروض عند فتح الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            initDatabase();
+            displayOffers('all');
+        });
+        
+        // الوظائف الأساسية (للصفحات الأخرى)
+        function showPropertyTypeSelection() {
+            window.location.href = '#property-type-section';
+        }
+    </script>
+    <!-- ملف إدارة المصادقة المشترك -->
+    <script src="js/auth.js"></script>
+
+    <script>
+    // استخدم نظام المصادقة في صفحة الطروحات
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.authSystem) {
+            window.authSystem.initializeAuth();
+        }
+        
+        // ربط أزرار تسجيل الدخول والخروج
+        document.getElementById('loginHeaderBtn')?.addEventListener('click', function() {
+            if (window.authSystem) {
+                window.authSystem.showLoginModal();
+            }
+        });
+        
+        document.getElementById('logoutBtn')?.addEventListener('click', async function() {
+            if (window.authSystem) {
+                await window.authSystem.logout();
+                // إعادة تحميل الصفحة بعد تسجيل الخروج
+                window.location.reload();
+            }
+        });
+        
+        // حماية الوظائف التي تتطلب تسجيل دخول
+        document.querySelector('.add-offer-btn')?.addEventListener('click', function(e) {
+            if (window.authSystem && !window.authSystem.isLoggedIn()) {
+                e.preventDefault();
+                alert('يرجى تسجيل الدخول أولاً لإضافة عرض جديد');
+                window.authSystem.showLoginModal();
+            }
+        });
+    });
+    </script>
+</body>
+</html>

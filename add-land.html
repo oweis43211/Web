@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME LAND | إضافة أرض</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0a2d5e;
+            --secondary-color: #d4a762;
+            --accent-color: #2e7d5a;
+            --light-bg: #f8fafc;
+            --dark-text: #1e293b;
+            --light-text: #64748b;
+            --white: #ffffff;
+            --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .form-container-wrapper {
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ========== Header ========== */
+        .main-header {
+            background-color: var(--white);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .logo-img {
+            height: 80px;
+            width: 150px;
+            margin-left: 30px;
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 1.8rem;
+        }
+
+        .main-nav a {
+            font-weight: 600;
+            color: var(--dark-text);
+            position: relative;
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            right: 0;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-welcome {
+            font-weight: 600;
+            color: var(--primary-color);
+            padding: 15px 10px 10px;
+        }
+
+        .login-header-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .login-header-btn:hover {
+            background: #1a4396;
+            transform: translateY(-2px);
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .logout-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* نموذج الإضافة */
+        .form-container {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 3rem;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .form-header h1 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .form-header p {
+            color: var(--light-text);
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1rem;
+        }
+
+        .form-group label.required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--white);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(212, 167, 98, 0.15);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .currency-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .currency-btn {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .currency-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .currency-btn input[type="radio"] {
+            display: none;
+        }
+
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .range-container input[type="range"] {
+            flex: 1;
+            height: 8px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .range-container input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            cursor: pointer;
+        }
+
+        .range-value {
+            min-width: 50px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 2px solid #f1f5f9;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-cancel {
+            background: #f1f5f9;
+            color: var(--dark-text);
+        }
+
+        .btn-cancel:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(240, 147, 251, 0.25);
+        }
+
+        .governorates-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 0.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: #f8fafc;
+        }
+
+        .governorate-item {
+            padding: 0.8rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .governorate-item:hover {
+            border-color: var(--secondary-color);
+            background: rgba(212, 167, 98, 0.05);
+        }
+
+        .governorate-item.selected {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .selected-governorate {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background: #f0f9ff;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 2px solid #0ea5e9;
+        }
+
+        .selected-governorate span {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .remove-governorate {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .governorates-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+
+            .main-nav ul {
+                display: none;
+            }
+
+            .user-menu {
+                gap: 0.5rem;
+            }
+        }
+
+        /* ========== Footer ========== */
+        .main-footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .footer-column h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.8rem;
+            color: var(--secondary-color);
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.9rem;
+        }
+
+        .footer-column a {
+            opacity: 0.85;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .footer-column a:hover {
+            opacity: 1;
+            color: var(--secondary-color);
+            transform: translateX(-5px);
+            text-decoration: none;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header class="main-header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="HOME LAND Logo" class="logo-img">
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+                    <li><a href="#"><i class="fas fa-user-tie"></i> المديرين</a></li>
+                    <li><a href="#"><i class="fas fa-bullhorn"></i> الرعاية والإعلانات</a></li>
+                    <li><a href="#"><i class="fas fa-map-marked-alt"></i> خريطة الموقع</a></li>
+                    <li><a href="#"><i class="fas fa-plus-circle"></i> أضف عقارك</a></li>
+                    <li><a href="#"><i class="fas fa-money-bill-wave"></i> حوالات</a></li>
+                    <li><a href="offers.html"><i class="fas fa-rocket"></i> طروحات</a></li>
+                </ul>
+            </nav>
+            <div class="user-menu">
+                <span class="user-welcome" id="userWelcome">مرحباً بك في HOME LAND</span>
+                <button class="login-header-btn" id="loginHeaderBtn">
+                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                </button>
+                <button class="logout-btn" id="logoutBtn" style="display: none;">
+                    <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- نموذج الإضافة -->
+    <div class="form-container-wrapper">
+        <div class="form-container">
+            <div class="form-header">
+                <h1><i class="fas fa-mountain"></i> إضافة أرض جديدة</h1>
+                <p>املأ النموذج التالي لإضافة عرض جديد للأراضي</p>
+            </div>
+
+            <form id="landForm">
+                <!-- المساحة -->
+                <div class="form-group">
+                    <label for="area" class="required">المساحة بالمتر المربع</label>
+                    <input type="number" id="area" class="form-control" 
+                           placeholder="أدخل مساحة الأرض بالمتر المربع" min="1" required>
+                </div>
+
+                <!-- الحي -->
+                <div class="form-group">
+                    <label for="district" class="required">الحي</label>
+                    <input type="text" id="district" class="form-control" 
+                           placeholder="اكتب اسم الحي" required>
+                </div>
+
+                <!-- المجاورة -->
+                <div class="form-group">
+                    <label for="neighborhood" class="required">المجاورة</label>
+                    <input type="text" id="neighborhood" class="form-control" 
+                           placeholder="اكتب اسم المجاورة" required>
+                </div>
+
+                <!-- نسبة التميز -->
+                <div class="form-group">
+                    <label for="excellence" class="required">نسبة التميز %</label>
+                    <div class="range-container">
+                        <input type="range" id="excellence" min="0" max="100" value="50" 
+                               oninput="document.getElementById('excellenceValue').textContent = this.value + '%'">
+                        <span id="excellenceValue" class="range-value">50%</span>
+                    </div>
+                </div>
+
+                <!-- المدفوع والعملة -->
+                <!-- استبدال قسم المدفوع والعملة بالكود التالي -->
+
+                <!-- المدفوع والعملة -->
+                <div class="form-group">
+                    <label class="required">المبلغ المدفوع</label>
+                    <div class="form-row">
+                        <div>
+                            <input type="number" id="paidAmount" class="form-control" 
+                                placeholder="أدخل المبلغ" min="0" required>
+                        </div>
+                        <div class="currency-group">
+                            <label class="currency-btn" id="landCurrencyEGPBtn">
+                                <input type="radio" id="landCurrencyEGP" name="landCurrency" value="EGP" checked>
+                                <i class="fas fa-pound-sign"></i> جنيه مصري
+                            </label>
+                            <label class="currency-btn" id="landCurrencyUSDBtn">
+                                <input type="radio" id="landCurrencyUSD" name="landCurrency" value="USD">
+                                <i class="fas fa-dollar-sign"></i> دولار $
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- السعر النهائي (الأوفر) -->
+                <div class="form-group">
+                    <label for="offer" class="required">السعر النهائي (الأوفر) بالجنيه المصري</label>
+                    <input type="number" id="offer" class="form-control" 
+                           placeholder="أدخل السعر النهائي بالجنيه المصري" min="0" required>
+                </div>
+
+                <!-- المحافظة -->
+                <div class="form-group">
+                    <label class="required">المحافظة</label>
+                    <div class="governorates-grid" id="governoratesGrid">
+                        <!-- سيتم ملؤها بالجافاسكريبت -->
+                    </div>
+                    <input type="hidden" id="selectedGovernorate" required>
+                    <div id="selectedGovernorateDisplay" class="selected-governorate" style="display: none;">
+                        <span id="governorateName"></span>
+                        <button type="button" class="remove-governorate" onclick="removeGovernorate()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- معلومات إضافية -->
+                <div class="form-group">
+                    <label for="additionalInfo">معلومات إضافية</label>
+                    <textarea id="additionalInfo" class="form-control" rows="4" 
+                              placeholder="أي معلومات إضافية عن الأرض..."></textarea>
+                </div>
+
+                <!-- أزرار الإجراءات -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-cancel" onclick="window.location.href='offers.html'">
+                        <i class="fas fa-times"></i> إلغاء
+                    </button>
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-save"></i> حفظ العرض
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- الفوتر -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>عن HOME LAND</h4>
+                    <p style="opacity: 0.85; margin-bottom: 1.5rem;">المنصة العقارية الرائدة التي تربط بين البائعين والمشترين بثقة وشفافية منذ 2023.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> الشروط والأحكام</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> سياسة الخصوصية</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> الأسئلة الشائعة</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>التصنيفات</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> شقق للبيع في القاهرة</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> فلل للبيع في الجيزة</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> محلات للايجار</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>اتصل بنا</h4>
+                    <ul>
+                        <li>
+                        <a href="https://wa.me/201119991216?text=مرحباً، أريد الاستفسار عن الخدمات التي تقدمونها" target="_blank">
+                            <i class="fas fa-phone"></i>01119991216
+                        </a>
+                        </li>                       
+                        <li>
+                        <a href="https://wa.me/201009718777" target="_blank">
+                            <i class="fas fa-phone"></i>01009718777
+                        </a>
+                        </li>  
+                        <li><a href="mailto:home-land@email.com"><i class="fas fa-envelope"></i>home-land@email.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 <strong>HOME LAND</strong>. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // إعداد Supabase
+    const SUPABASE_URL = 'https://drnmmtpddixgpobcxijt.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRybm1tdHBkZGl4Z3BvYmN4aWp0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg0MDQ1ODgsImV4cCI6MjA4Mzk4MDU4OH0.Ym58ylN2hiyruuZ5NVoFyS9ZCHKvRE0QRKiiS0qXWGU';
+
+    let supabaseClient = null;
+    try {
+        if (typeof supabase !== 'undefined') {
+            supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
+    } catch (e) {
+        console.warn('Supabase client initialization failed', e);
+    }
+
+    // قائمة المحافظات
+    const governorates = [
+        "القاهرة الجديدة",
+        "العبور الجديدة", 
+        "الشروق الجديدة",
+        "بدر الجديدة",
+        "المنصورة الجديدة",
+        "العاشر من رمضان",
+        "6 أكتوبر",
+        "الفيوم الجديدة",
+        "أسيوط الجديدة",
+        "أسوان الجديدة"
+    ];
+
+    // ملء قائمة المحافظات
+    function populateGovernorates() {
+        const grid = document.getElementById('governoratesGrid');
+        if (!grid) return;
+        
+        grid.innerHTML = '';
+        
+        governorates.forEach(gov => {
+            const item = document.createElement('div');
+            item.className = 'governorate-item';
+            item.textContent = gov;
+            item.onclick = function() {
+                selectGovernorate(gov);
+            };
+            grid.appendChild(item);
+        });
+    }
+
+    // اختيار محافظة
+    function selectGovernorate(gov) {
+        document.getElementById('selectedGovernorate').value = gov;
+        document.getElementById('governorateName').textContent = gov;
+        document.getElementById('selectedGovernorateDisplay').style.display = 'flex';
+        
+        document.querySelectorAll('.governorate-item').forEach(item => {
+            item.classList.remove('selected');
+            if (item.textContent === gov) {
+                item.classList.add('selected');
+            }
+        });
+    }
+
+    // إزالة اختيار المحافظة
+    function removeGovernorate() {
+        document.getElementById('selectedGovernorate').value = '';
+        document.getElementById('selectedGovernorateDisplay').style.display = 'none';
+        document.querySelectorAll('.governorate-item').forEach(item => {
+            item.classList.remove('selected');
+        });
+    }
+    // حماية الوظائف التي تتطلب تسجيل دخول
+    function protectFunction(callback) {
+        if (window.authSystem && window.authSystem.isLoggedIn()) {
+            callback();
+        } else {
+            alert('يرجى تسجيل الدخول للوصول إلى هذه الميزة');
+            if (window.authSystem) {
+                window.authSystem.showLoginModal();
+            }
+            // حفظ الصفحة الحالية للعودة إليها بعد تسجيل الدخول
+            localStorage.setItem('redirectAfterLogin', window.location.href);
+        }
+    }
+
+    // استخدام المثال:
+    document.querySelector('.add-offer-btn')?.addEventListener('click', function() {
+        protectFunction(function() {
+            // الكود الذي يتطلب تسجيل دخول
+            window.location.href = 'add-house.html';
+        });
+    });
+
+    // إدارة أزرار العملة
+    document.addEventListener('DOMContentLoaded', function() {
+        // تهيئة أزرار العملة
+        document.querySelectorAll('.currency-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // إزالة النشاط من جميع الأزرار
+                document.querySelectorAll('.currency-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                
+                // إضافة النشاط للزر المختار
+                this.classList.add('active');
+                
+                // تحديد الزر الـ radio المقابل
+                const radioId = this.getAttribute('id').replace('Btn', '');
+                document.getElementById(radioId).checked = true;
+            });
+        });
+        
+        // تعيين النشاط للزر الافتراضي
+        document.querySelectorAll('.currency-btn').forEach(btn => {
+            const radioId = btn.getAttribute('id').replace('Btn', '');
+            const radio = document.getElementById(radioId);
+            
+            if (radio && radio.checked) {
+                btn.classList.add('active');
+            }
+        });
+    });
+
+    // ===== التحقق من تسجيل الدخول =====
+    document.addEventListener('DOMContentLoaded', function() {
+        const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+        
+        if (!userData.auth_id) {
+            alert('يرجى تسجيل الدخول أولاً');
+            window.location.href = 'index.html';
+            return;
+        }
+        
+        // تحديث واجهة المستخدم
+        const userWelcome = document.getElementById('userWelcome');
+        const loginHeaderBtn = document.getElementById('loginHeaderBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        
+        if (userData.name) {
+            userWelcome.textContent = `مرحباً، ${userData.name}!`;
+            if (loginHeaderBtn) loginHeaderBtn.style.display = 'none';
+            if (logoutBtn) logoutBtn.style.display = 'block';
+        }
+        
+        // إضافة مستمع لتسجيل الخروج
+        logoutBtn?.addEventListener('click', async function() {
+            // تسجيل الخروج من Supabase
+            if (supabaseClient) {
+                await supabaseClient.auth.signOut();
+            }
+            
+            // مسح البيانات المحلية
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('username');
+            localStorage.removeItem('userData');
+            
+            window.location.href = 'index.html';
+        });
+        
+        // تهيئة الصفحة
+        populateGovernorates();
+    });
+
+    // ===== معالجة تقديم النموذج =====
+    document.getElementById('landForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // التحقق من تسجيل الدخول
+        const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+        if (!userData.auth_id) {
+            alert('يرجى تسجيل الدخول أولاً لإضافة طروحة');
+            window.location.href = 'index.html';
+            return;
+        }
+        
+        // جمع البيانات
+        const landData = {
+            property_type: 'land',
+            area: parseInt(document.getElementById('area').value),
+            neighborhood: document.getElementById('neighborhood').value,
+            district: document.getElementById('district').value,
+            excellence_percentage: parseInt(document.getElementById('excellence').value),
+            paid_amount: parseFloat(document.getElementById('paidAmount').value),
+            paid_currency: document.querySelector('input[name="landCurrency"]:checked').value,
+            offer_price_egp: parseFloat(document.getElementById('offer').value),
+            governorate: document.getElementById('selectedGovernorate').value,
+            additional_info: document.getElementById('additionalInfo').value,
+            user_id: userData.auth_id,
+            status: 'active',
+            created_at: new Date().toISOString()
+        };
+        
+        // التحقق من البيانات
+        if (!landData.governorate) {
+            alert('الرجاء اختيار المحافظة');
+            return;
+        }
+        
+        if (landData.area < 1) {
+            alert('المساحة يجب أن تكون أكبر من 0');
+            return;
+        }
+        
+        if (landData.paid_amount < 0 || landData.offer_price_egp < 0) {
+            alert('السعر لا يمكن أن يكون سالباً');
+            return;
+        }
+        
+        // عرض مؤشر التحميل
+        const submitBtn = document.querySelector('.btn-submit');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحفظ...';
+        submitBtn.disabled = true;
+        
+        try {
+            // إضافة الطروحة إلى قاعدة البيانات
+            const { data, error } = await supabaseClient
+                .from('property_offers')
+                .insert([landData]);
+            
+            if (error) throw error;
+            
+            // نجاح الإضافة
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> تم الحفظ بنجاح';
+            submitBtn.style.backgroundColor = '#28a745';
+            
+            setTimeout(() => {
+                alert('تم إضافة الطروحة بنجاح!');
+                window.location.href = 'index.html';
+            }, 1500);
+            
+        } catch (error) {
+            console.error('Error saving offer:', error);
+            alert('حدث خطأ أثناء حفظ الطروحة: ' + error.message);
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+    </script>
+</body>
+</html>
