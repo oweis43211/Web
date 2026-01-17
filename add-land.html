@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOME LAND | إضافة أرض</title>
+    <title>ARAB LAND | إضافة أرض</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -491,6 +491,56 @@
             font-size: 0.95rem;
             opacity: 0.8;
         }
+        /* أنماط مشتركة لحالة المستخدم */
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-welcome {
+            font-weight: 600;
+            color: var(--primary-color);
+            padding: 0.5rem;
+        }
+
+        .login-header-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .login-header-btn:hover {
+            background: #1a4396;
+            transform: translateY(-2px);
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logout-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -498,7 +548,7 @@
     <header class="main-header">
         <div class="container header-content">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="HOME LAND Logo" class="logo-img">
+                <img src="images/logo.png" alt="ARAB LAND Logo" class="logo-img">
             </a>
             <nav class="main-nav">
                 <ul>
@@ -512,7 +562,7 @@
                 </ul>
             </nav>
             <div class="user-menu">
-                <span class="user-welcome" id="userWelcome">مرحباً بك في HOME LAND</span>
+                <span class="user-welcome" id="userWelcome">مرحباً بك في ARAB LAND</span>
                 <button class="login-header-btn" id="loginHeaderBtn">
                     <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
                 </button>
@@ -634,7 +684,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-column">
-                    <h4>عن HOME LAND</h4>
+                    <h4>عن ARAB LAND</h4>
                     <p style="opacity: 0.85; margin-bottom: 1.5rem;">المنصة العقارية الرائدة التي تربط بين البائعين والمشترين بثقة وشفافية منذ 2023.</p>
                 </div>
                 <div class="footer-column">
@@ -671,10 +721,13 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2025 <strong>HOME LAND</strong>. جميع الحقوق محفوظة.</p>
+                <p>© 2025 <strong>ARAB LAND</strong>. جميع الحقوق محفوظة.</p>
             </div>
         </div>
     </footer>
+
+    <!-- ملف إدارة المصادقة المشترك -->
+    <script src="js/auth.js"></script>
 
     <script>
     // إعداد Supabase
@@ -911,6 +964,72 @@
             submitBtn.disabled = false;
         }
     });
+    </script>
+    <!-- في نهاية كل ملف HTML -->
+    <script>
+    // استخدم نظام المصادقة المشترك
+    document.addEventListener('DOMContentLoaded', async function() {
+        // تهيئة نظام المصادقة
+        await window.authSystem.initializeAuth();
+        
+        // حماية الصفحات التي تتطلب تسجيل دخول
+        const protectedPages = ['add-house.html', 'add-land.html', 'offers.html'];
+        const currentPage = window.location.pathname.split('/').pop();
+        
+        if (protectedPages.includes(currentPage) && !window.authSystem.isLoggedIn()) {
+            alert('يرجى تسجيل الدخول أولاً للوصول إلى هذه الصفحة');
+            window.location.href = 'index.html';
+            return;
+        }
+        
+        // تحديث الروابط في القائمة بناءً على حالة تسجيل الدخول
+        updateNavigationLinks();
+    });
+
+    // تحديث الروابط في القائمة
+    function updateNavigationLinks() {
+        const isLoggedIn = window.authSystem.isLoggedIn();
+        
+        // رابط "أضف عقارك"
+        const addPropertyLink = document.querySelector('.main-nav a[href="#"] i.fa-plus-circle')?.closest('a');
+        if (addPropertyLink) {
+            if (isLoggedIn) {
+                addPropertyLink.href = "offers.html";
+                addPropertyLink.onclick = null;
+            } else {
+                addPropertyLink.href = "#";
+                addPropertyLink.onclick = function(e) {
+                    e.preventDefault();
+                    alert('يرجى تسجيل الدخول أولاً لإضافة عقار');
+                    window.authSystem.showLoginModal();
+                };
+            }
+        }
+        
+        // رابط "طروحات"
+        const offersLink = document.getElementById('offersLink');
+        if (offersLink) {
+            if (!isLoggedIn) {
+                offersLink.onclick = function(e) {
+                    e.preventDefault();
+                    alert('يرجى تسجيل الدخول أولاً لعرض الطروحات');
+                    window.authSystem.showLoginModal();
+                };
+            }
+        }
+    }
+
+    // دالة حماية الوظائف التي تتطلب تسجيل دخول
+    function protectFunction(callback) {
+        if (window.authSystem && window.authSystem.isLoggedIn()) {
+            callback();
+        } else {
+            alert('يرجى تسجيل الدخول للوصول إلى هذه الميزة');
+            window.authSystem.showLoginModal();
+            // حفظ الصفحة الحالية للعودة إليها بعد تسجيل الدخول
+            localStorage.setItem('redirectAfterLogin', window.location.href);
+        }
+    }
     </script>
 </body>
 </html>
