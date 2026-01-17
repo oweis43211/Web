@@ -139,6 +139,7 @@
             padding: 0.5rem 0;
             font-size: 0.95rem;
             white-space: nowrap;
+            text-decoration: none;
         }
 
         .main-nav a::after {
@@ -155,6 +156,7 @@
 
         .main-nav a:hover {
             color: var(--primary-color);
+            text-decoration: none;
         }
 
         .main-nav a:hover::after {
@@ -170,6 +172,7 @@
         .user-welcome {
             font-weight: 600;
             color: var(--primary-color);
+            padding: 15px 10px 10px;
         }
 
         .login-header-btn {
@@ -195,7 +198,7 @@
             background: transparent;
             border: 2px solid var(--primary-color);
             color: var(--primary-color);
-            padding: 0.5rem 1.5rem;
+            padding: 0.5rem 1rem;
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
@@ -1130,12 +1133,15 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            color: var(--white);
+            text-decoration: none;
         }
 
         .footer-column a:hover {
             opacity: 1;
             color: var(--secondary-color);
             transform: translateX(-5px);
+            text-decoration: none;
         }
 
         .footer-bottom {
@@ -1185,6 +1191,7 @@
                 flex-direction: column;
                 gap: 0.5rem;
                 align-items: flex-end;
+                padding: 60px;
             }
         }
 
@@ -1227,6 +1234,125 @@
         .animated-btn.success {
             background: linear-gradient(135deg, #2ecc71, #27ae60) !important;
         }
+        
+        /* أنماط إضافية للعروض */
+        .offer-card-special {
+            position: relative;
+        }
+        
+        .offer-excellence-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #000;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            z-index: 2;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .offer-currency {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            margin-left: 5px;
+        }
+        
+        .offer-payment-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 5px;
+            flex-wrap: wrap;
+        }
+        
+        .payment-badge {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.2rem 0.7rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .payment-badge.usd {
+            background: #28a745;
+        }
+        
+        .payment-badge.egp {
+            background: #17a2b8;
+        }
+        
+        .offer-meta-extended {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        
+        .meta-item-extended {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.85rem;
+            color: var(--light-text);
+        }
+        
+        .meta-item-extended i {
+            color: var(--secondary-color);
+            width: 16px;
+        }
+        
+        .no-offers-message {
+            text-align: center;
+            padding: 4rem 2rem;
+            grid-column: 1 / -1;
+        }
+        
+        .no-offers-message i {
+            font-size: 4rem;
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+        }
+        
+        .no-offers-message h3 {
+            font-size: 1.8rem;
+            color: var(--dark-text);
+            margin-bottom: 1rem;
+        }
+        
+        .no-offers-message p {
+            color: var(--light-text);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .currency-selector {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .currency-btn {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .currency-btn.active {
+            border-color: var(--primary-color);
+            background: rgba(10, 45, 94, 0.1);
+            color: var(--primary-color);
+        }
     </style>
 </head>
 <body>
@@ -1241,10 +1367,11 @@
                 <nav class="main-nav">
                     <ul>
                         <li><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
-                        <li><a href="#"><i class="fas fa-user-tie"></i>المديرين</a></li>
+                        <li><a href="#"><i class="fas fa-user-tie"></i> المديرين</a></li>
                         <li><a href="#"><i class="fas fa-bullhorn"></i> الرعاية والإعلانات</a></li>
                         <li><a href="#"><i class="fas fa-map-marked-alt"></i> خريطة الموقع</a></li>
                         <li><a href="#"><i class="fas fa-plus-circle"></i> أضف عقارك</a></li>
+                        <li><a href="offers.html" id="offersLink"><i class="fas fa-rocket"></i> طروحات</a></li>
                     </ul>
                 </nav>
                 <div class="user-menu">
@@ -1472,82 +1599,39 @@
                         <h3>صيدليات</h3>
                         <p>صيدليات للبيع أو الإيجار في مواقع استراتيجية</p>
                     </div>
+                    <div class="category-card" onclick="window.location.href='offers.html'">
+                        <div class="category-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>طروحات</h3>
+                        <p>استكشف أحدث الطروحات والمشاريع الحصرية المتاحة</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Featured Properties -->
-        <section class="featured-properties">
+        <!-- عرض الطروحات الحقيقية بدلاً من العقارات المميزة -->
+        <!-- استبدال قسم featured-properties بالكود التالي -->
+
+        <!-- عرض الطروحات المميزة -->
+        <section class="featured-properties" id="featuredOffers">
             <div class="container">
                 <div class="section-title">
-                    <h2>عروض مميزة تناسبك</h2>
-                    <p>أبرز الفرص العقارية المختارة بعناية</p>
+                    <h2>عروض مميزة</h2>
+                    <p>استعرض أبرز العقارات الحصرية في منصة HOME LAND</p>
                 </div>
-                <div class="properties-grid">
-                    <!-- Property 1 -->
-                    <article class="property-card">
-                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="شقة فاخرة" class="property-img">
-                        <div class="property-content">
-                            <div class="property-header">
-                                <h3>شقة فاخرة للبيع في التجمع الخامس</h3>
-                                <div class="property-price">3,450,000 ج.م</div>
-                            </div>
-                            <p>شقة ٣ غرف بمساحة ١٦٠ م²، تشطيب سوبر لوكس، مطلوب عرب ٢٠٢٤.</p>
-                            <div class="property-meta">
-                                <div class="meta-item"><i class="fas fa-vector-square"></i> 160 م²</div>
-                                <div class="meta-item"><i class="fas fa-bed"></i> 3 غرف</div>
-                                <div class="meta-item"><i class="fas fa-bath"></i> 3 حمام</div>
-                                <div class="meta-item"><i class="fas fa-car"></i> جراج</div>
-                            </div>
-                            <div class="property-footer">
-                                <span class="property-type">شقة للبيع</span>
-                                <a href="#" class="property-link">عرض التفاصيل <i class="fas fa-arrow-left"></i></a>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- Property 2 -->
-                    <article class="property-card">
-                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="فيلا" class="property-img">
-                        <div class="property-content">
-                            <div class="property-header">
-                                <h3>فيلا راقية في الساحل الشمالي</h3>
-                                <div class="property-price">8,900,000 ج.م</div>
-                            </div>
-                            <p>فيلا دوبلكس بمساحة ٣٠٠ م² على بعد ٥٠٠ م من البحر، حديقة خاصة وحمام سباحة.</p>
-                            <div class="property-meta">
-                                <div class="meta-item"><i class="fas fa-vector-square"></i> 300 م²</div>
-                                <div class="meta-item"><i class="fas fa-bed"></i> 5 غرف</div>
-                                <div class="meta-item"><i class="fas fa-bath"></i> 4 حمام</div>
-                                <div class="meta-item"><i class="fas fa-swimming-pool"></i> حمام سباحة</div>
-                            </div>
-                            <div class="property-footer">
-                                <span class="property-type">فيلا للبيع</span>
-                                <a href="#" class="property-link">عرض التفاصيل <i class="fas fa-arrow-left"></i></a>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- Property 3 -->
-                    <article class="property-card">
-                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="أرض" class="property-img">
-                        <div class="property-content">
-                            <div class="property-header">
-                                <h3>قطعة أرض سكنية في الشيخ زايد</h3>
-                                <div class="property-price">1,650,000 ج.م</div>
-                            </div>
-                            <p>قطعة أرض ٥٠٠ م² في منطقة سكنية هادئة، مرخصة للبناء فوراً، خدمات متكاملة.</p>
-                            <div class="property-meta">
-                                <div class="meta-item"><i class="fas fa-vector-square"></i> 500 م²</div>
-                                <div class="meta-item"><i class="fas fa-map"></i> شارع 20 م</div>
-                                <div class="meta-item"><i class="fas fa-tint"></i> صرف صحي</div>
-                                <div class="meta-item"><i class="fas fa-bolt"></i> كهرباء</div>
-                            </div>
-                            <div class="property-footer">
-                                <span class="property-type">أرض للبيع</span>
-                                <a href="#" class="property-link">عرض التفاصيل <i class="fas fa-arrow-left"></i></a>
-                            </div>
-                        </div>
-                    </article>
+                
+                <!-- زر إضافة طروحة جديدة (للمستخدمين المسجلين فقط) -->
+                <div class="add-offer-btn-container" style="text-align: center; margin-bottom: 2rem;">
+                    <button class="btn btn-primary" id="addOfferBtnMain" style="padding: 1rem 2.5rem; font-size: 1.1rem;">
+                        <i class="fas fa-plus-circle"></i> إضافة عرض جديد
+                    </button>
                 </div>
+                
+                <div class="properties-grid" id="featuredOffersGrid">
+                    <!-- سيتم تحميل الطروحات المميزة هنا -->
+                </div>
+                
             </div>
         </section>
 
@@ -1579,10 +1663,10 @@
                         <h4>اتصل بنا</h4>
                         <ul>
                             <li>
-                            <a href="https://wa.me/201119991216" target="_blank">
+                            <a href="https://wa.me/201119991216?text=مرحباً، أريد الاستفسار عن الخدمات التي تقدمونها" target="_blank">
                                 <i class="fas fa-phone"></i>01119991216
                             </a>
-                            </li>                         
+                            </li>                       
                             <li>
                             <a href="https://wa.me/201009718777" target="_blank">
                                 <i class="fas fa-phone"></i>01009718777
@@ -1753,800 +1837,1099 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const loginOverlay = document.getElementById('loginOverlay');
-            const mainWebsite = document.getElementById('mainWebsite');
-            const loginHeaderBtn = document.getElementById('loginHeaderBtn');
-            const logoutBtn = document.getElementById('logoutBtn');
-            const userWelcome = document.getElementById('userWelcome');
-            const animatedContainer = document.getElementById('animatedContainer');
-            
-            // تم إزالة المتغير المكرر هنا
-            // const blueScreenLoginBtn = document.getElementById('blueScreenLoginBtn');
-
-            // ===== منطق التصميم المتحرك =====
-            const showRegisterLink = document.getElementById('showRegisterLink');
-            const showLoginLink = document.getElementById('showLoginLink');
-            
-            // إضافة تعريف blueScreenLoginBtn هنا فقط
-            const blueScreenLoginBtn = document.getElementById('blueScreenLoginBtn');
-
-            // التحويل بين تسجيل الدخول والتسجيل
-            showRegisterLink?.addEventListener('click', function(e) {
-                e.preventDefault();
-                animatedContainer.classList.add('active');
-            });
-
-            showLoginLink?.addEventListener('click', function(e) {
-                e.preventDefault();
-                animatedContainer.classList.remove('active');
-            });
-
-            blueScreenLoginBtn?.addEventListener('click', function() {
-                animatedContainer.classList.remove('active');
-            });
-
-            // ===== إعداد Supabase =====
-            // تأكد من وجود جدول "users" في Supabase مع الأعمدة التالية:
-            // - id (UUID, primary key) - يولده Supabase تلقائيًا
-            // - email (text)
-            // - name (text)
-            // - mobile (text)
-            // - role (text)
-            // - mediator_type (text)
-            // - company_name (text)
-            // - company_logo (text)
-            // - company_address (text)
-            // - created_at (timestamp)
-            const SUPABASE_URL = 'https://drnmmtpddixgpobcxijt.supabase.co';
-            const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRybm1tdHBkZGl4Z3BvYmN4aWp0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg0MDQ1ODgsImV4cCI6MjA4Mzk4MDU4OH0.Ym58ylN2hiyruuZ5NVoFyS9ZCHKvRE0QRKiiS0qXWGU';
-            let supabaseClient = null;
-            try {
-                if (typeof supabase !== 'undefined') {
-                    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                }
-            } catch (e) {
-                console.warn('Supabase client initialization failed', e);
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginOverlay = document.getElementById('loginOverlay');
+        const mainWebsite = document.getElementById('mainWebsite');
+        const loginHeaderBtn = document.getElementById('loginHeaderBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userWelcome = document.getElementById('userWelcome');
+        const animatedContainer = document.getElementById('animatedContainer');
+        
+        // إعداد Supabase
+        const SUPABASE_URL = 'https://drnmmtpddixgpobcxijt.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRybm1tdHBkZGl4Z3BvYmN4aWp0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg0MDQ1ODgsImV4cCI6MjA4Mzk4MDU4OH0.Ym58ylN2hiyruuZ5NVoFyS9ZCHKvRE0QRKiiS0qXWGU';
+        let supabaseClient = null;
+        try {
+            if (typeof supabase !== 'undefined') {
+                supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
             }
+        } catch (e) {
+            console.warn('Supabase client initialization failed', e);
+        }
 
-            // التحقق إذا كان المستخدم مسجل دخوله بالفعل
-            const isLoggedIn = localStorage.getItem('isLoggedIn');
+        // ===== نظام إدارة الجلسات =====
+        let currentUser = null;
+        
+        // تحميل بيانات المستخدم
+        async function loadUserSession() {
+            if (supabaseClient) {
+                try {
+                    const { data: sessionData } = await supabaseClient.auth.getSession();
+                    if (sessionData.session) {
+                        const { data: userData } = await supabaseClient.auth.getUser();
+                        if (userData.user) {
+                            currentUser = {
+                                id: userData.user.id,
+                                email: userData.user.email,
+                                name: localStorage.getItem('username') || userData.user.email.split('@')[0]
+                            };
+                            
+                            updateUIForLoggedInUser();
+                            
+                            const { data: profileData } = await supabaseClient
+                                .from('users')
+                                .select('*')
+                                .eq('auth_id', currentUser.id)
+                                .single();
+                                
+                            if (profileData) {
+                                localStorage.setItem('userData', JSON.stringify(profileData));
+                                currentUser.profile = profileData;
+                            }
+                            
+                            return;
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Error loading session:', error);
+                }
+            }
+            
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
             const savedUsername = localStorage.getItem('username');
             
-            if (isLoggedIn === 'true' && savedUsername) {
-                userWelcome.textContent = `مرحباً، ${savedUsername}!`;
+            if (isLoggedIn && savedUsername) {
+                currentUser = {
+                    id: 'local_' + Date.now(),
+                    email: savedUsername + '@local.com',
+                    name: savedUsername
+                };
+                updateUIForLoggedInUser();
+            }
+        }
+
+        // تحديث واجهة المستخدم بعد تسجيل الدخول
+        function updateUIForLoggedInUser() {
+            if (currentUser) {
+                userWelcome.textContent = `مرحباً، ${currentUser.name}!`;
                 if (loginHeaderBtn) loginHeaderBtn.style.display = 'none';
                 if (logoutBtn) logoutBtn.style.display = 'block';
             }
+        }
 
-            // فتح نافذة تسجيل الدخول من الهيدر
-            loginHeaderBtn?.addEventListener('click', function() {
-                loginOverlay?.classList.add('active');
-                // إعادة تعيين إلى شاشة تسجيل الدخول عند الفتح
-                animatedContainer?.classList.remove('active');
-            });
+        // ===== منطق التصميم المتحرك =====
+        const showRegisterLink = document.getElementById('showRegisterLink');
+        const showLoginLink = document.getElementById('showLoginLink');
+        const blueScreenLoginBtn = document.getElementById('blueScreenLoginBtn');
 
-            // إغلاق نافذة تسجيل الدخول عند النقر خارجها
-            loginOverlay?.addEventListener('click', function(e) {
-                if (e.target === loginOverlay) {
-                    loginOverlay.classList.remove('active');
-                }
-            });
+        showRegisterLink?.addEventListener('click', function(e) {
+            e.preventDefault();
+            animatedContainer.classList.add('active');
+        });
 
-            // ===== إدارة أدوار المستخدم =====
-            const registerRole = document.getElementById('registerRole');
-            const mediatorFields = document.getElementById('mediatorFields');
-            const mediatorType = document.getElementById('mediatorType');
-            const companyFields = document.getElementById('companyFields');
-            const companyLogoUpload = document.getElementById('companyLogoUpload');
-            const companyLogo = document.getElementById('companyLogo');
-            const logoPreview = document.getElementById('logoPreview');
-            const developerOverlay = document.getElementById('developerOverlay');
-            const closeDeveloperPopup = document.getElementById('closeDeveloperPopup');
-            const saveDeveloperInfo = document.getElementById('saveDeveloperInfo');
-            const developerCompanyName = document.getElementById('developerCompanyName');
-            const developerCompanyAddress = document.getElementById('developerCompanyAddress');
+        showLoginLink?.addEventListener('click', function(e) {
+            e.preventDefault();
+            animatedContainer.classList.remove('active');
+        });
 
-            let developerInfo = {
-                companyName: '',
-                companyAddress: ''
-            };
+        blueScreenLoginBtn?.addEventListener('click', function() {
+            animatedContainer.classList.remove('active');
+        });
 
-            // متغيرات الملفات
-            let companyLogoFile = null;
-            let companyLogoUrl = '';
+        // فتح نافذة تسجيل الدخول
+        loginHeaderBtn?.addEventListener('click', function() {
+            loginOverlay?.classList.add('active');
+            animatedContainer?.classList.remove('active');
+        });
 
-            // عند تغيير الصفة
-            registerRole?.addEventListener('change', function() {
-                const role = this.value;
-                
-                // إخفاء جميع الحقول الإضافية أولاً
-                if (mediatorFields) mediatorFields.classList.remove('show');
+        // إغلاق نافذة تسجيل الدخول
+        loginOverlay?.addEventListener('click', function(e) {
+            if (e.target === loginOverlay) {
+                loginOverlay.classList.remove('active');
+            }
+        });
+
+        // ===== إدارة أدوار المستخدم =====
+        const registerRole = document.getElementById('registerRole');
+        const mediatorFields = document.getElementById('mediatorFields');
+        const mediatorType = document.getElementById('mediatorType');
+        const companyFields = document.getElementById('companyFields');
+        const companyLogoUpload = document.getElementById('companyLogoUpload');
+        const companyLogo = document.getElementById('companyLogo');
+        const logoPreview = document.getElementById('logoPreview');
+        const developerOverlay = document.getElementById('developerOverlay');
+        const closeDeveloperPopup = document.getElementById('closeDeveloperPopup');
+        const saveDeveloperInfo = document.getElementById('saveDeveloperInfo');
+        const developerCompanyName = document.getElementById('developerCompanyName');
+        const developerCompanyAddress = document.getElementById('developerCompanyAddress');
+
+        let developerInfo = {
+            companyName: '',
+            companyAddress: ''
+        };
+
+        let companyLogoFile = null;
+        let companyLogoUrl = '';
+
+        // عند تغيير الصفة
+        registerRole?.addEventListener('change', function() {
+            const role = this.value;
+            
+            if (mediatorFields) mediatorFields.classList.remove('show');
+            if (companyFields) companyFields.classList.remove('show');
+            
+            if (role === 'وسيط') {
+                if (mediatorFields) mediatorFields.classList.add('show');
+            } else if (role === 'مطور') {
+                if (developerOverlay) developerOverlay.classList.add('active');
+            } else if (role === 'شركة') {
+                if (mediatorFields) mediatorFields.classList.add('show');
+                if (companyFields) companyFields.classList.add('show');
+                if (mediatorType) mediatorType.value = 'شركة';
+            }
+        });
+
+        // عند تغيير نوع الوسيط
+        mediatorType?.addEventListener('change', function() {
+            const type = this.value;
+            if (type === 'شركة') {
+                if (companyFields) companyFields.classList.add('show');
+            } else {
                 if (companyFields) companyFields.classList.remove('show');
-                
-                if (role === 'وسيط') {
-                    if (mediatorFields) mediatorFields.classList.add('show');
-                } else if (role === 'مطور') {
-                    // فتح النافذة المنبثقة للمطور
-                    if (developerOverlay) developerOverlay.classList.add('active');
-                } else if (role === 'شركة') {
-                    if (mediatorFields) mediatorFields.classList.add('show');
-                    if (companyFields) companyFields.classList.add('show');
-                    // تعيين نوع الوسيط إلى شركة
-                    if (mediatorType) mediatorType.value = 'شركة';
-                }
-            });
+            }
+        });
 
-            // عند تغيير نوع الوسيط
-            mediatorType?.addEventListener('change', function() {
-                const type = this.value;
-                if (type === 'شركة') {
-                    if (companyFields) companyFields.classList.add('show');
-                } else {
-                    if (companyFields) companyFields.classList.remove('show');
-                }
-            });
+        // رفع صورة شعار الشركة
+        companyLogoUpload?.addEventListener('click', function() {
+            companyLogo.click();
+        });
 
-            // رفع صورة شعار الشركة
-            companyLogoUpload?.addEventListener('click', function() {
-                companyLogo.click();
-            });
-
-            companyLogo?.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    // التحقق من حجم الملف
-                    if (file.size > 5 * 1024 * 1024) {
-                        alert('حجم الملف كبير جداً! الحد الأقصى 5MB');
-                        return;
-                    }
-                    
-                    // التحقق من نوع الملف
-                    const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-                    if (!validTypes.includes(file.type)) {
-                        alert('صيغة الملف غير مدعومة! يرجى رفع صورة بصيغة JPG أو PNG');
-                        return;
-                    }
-                    
-                    companyLogoFile = file;
-                    
-                    // عرض معاينة الصورة
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        companyLogoUrl = e.target.result;
-                        if (logoPreview) {
-                            logoPreview.innerHTML = `<img src="${companyLogoUrl}" alt="شعار الشركة">`;
-                            logoPreview.style.display = 'block';
-                        }
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-
-            // إدارة نافذة المطور
-            closeDeveloperPopup?.addEventListener('click', function() {
-                if (developerOverlay) developerOverlay.classList.remove('active');
-                if (registerRole) registerRole.value = '';
-            });
-
-            saveDeveloperInfo?.addEventListener('click', function() {
-                const companyName = developerCompanyName?.value?.trim() || '';
-                const companyAddress = developerCompanyAddress?.value?.trim() || '';
-                
-                if (!companyName || !companyAddress) {
-                    alert('الرجاء ملء جميع الحقول');
+        companyLogo?.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('حجم الملف كبير جداً! الحد الأقصى 5MB');
                     return;
                 }
                 
-                developerInfo = {
-                    companyName: companyName,
-                    companyAddress: companyAddress
+                const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+                if (!validTypes.includes(file.type)) {
+                    alert('صيغة الملف غير مدعومة! يرجى رفع صورة بصيغة JPG أو PNG');
+                    return;
+                }
+                
+                companyLogoFile = file;
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    companyLogoUrl = e.target.result;
+                    if (logoPreview) {
+                        logoPreview.innerHTML = `<img src="${companyLogoUrl}" alt="شعار الشركة">`;
+                        logoPreview.style.display = 'block';
+                    }
                 };
-                
-                if (developerOverlay) developerOverlay.classList.remove('active');
-                alert('تم حفظ معلومات الشركة بنجاح! يمكنك الآن إكمال إنشاء الحساب.');
-            });
-
-            // ===== معالجة تسجيل الدخول =====
-            document.getElementById('loginForm')?.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                
-                const email = document.getElementById('loginEmail').value;
-                const password = document.getElementById('loginPassword').value;
-                
-                if (!email || !password) {
-                    alert('الرجاء ملء جميع الحقول');
-                    return;
-                }
-                
-                const submitBtn = this.querySelector('.animated-btn');
-                if (!submitBtn) {
-                    alert('خطأ: لم يتم العثور على زر الإرسال');
-                    return;
-                }
-                const originalText = submitBtn.innerHTML;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الدخول...';
-                
-                try {
-                    // محاولة تسجيل الدخول عبر Supabase
-                    let loginResult = null;
-                    if (supabaseClient) {
-                        try {
-                            loginResult = await supabaseClient.auth.signInWithPassword({
-                                email: email,
-                                password: password
-                            });
-                            
-                            if (loginResult.error) {
-                                throw new Error(loginResult.error.message);
-                            }
-                            
-                            // جلب بيانات المستخدم
-                            const { data: userData, error: userError } = await supabaseClient
-                                .from('users')
-                                .select('*')
-                                .eq('email', email)
-                                .single();
-                                
-                            if (!userError && userData) {
-                                localStorage.setItem('userData', JSON.stringify(userData));
-                            }
-                            
-                        } catch (authError) {
-                            console.warn('Supabase auth failed, using local storage', authError);
-                        }
-                    }
-                    
-                    // حفظ بيانات المستخدم محلياً
-                    setTimeout(() => {
-                        localStorage.setItem('isLoggedIn', 'true');
-                        localStorage.setItem('username', email.split('@')[0] || 'مستخدم');
-                        
-                        submitBtn.innerHTML = '<i class="fas fa-check"></i> تم الدخول بنجاح';
-                        
-                        setTimeout(() => {
-                            loginOverlay.classList.remove('active');
-                            userWelcome.textContent = `مرحباً، ${email.split('@')[0] || 'مستخدم'}!`;
-                            if (loginHeaderBtn) loginHeaderBtn.style.display = 'none';
-                            if (logoutBtn) logoutBtn.style.display = 'block';
-                            document.getElementById('loginForm').reset();
-                            submitBtn.innerHTML = originalText;
-                        }, 1000);
-                    }, 1500);
-                } catch (error) {
-                    alert('خطأ في تسجيل الدخول: ' + error.message);
-                    submitBtn.innerHTML = originalText;
-                }
-            });
-
-                // ===== معالجة التسجيل مع منع الضغط المتكرر =====
-                document.getElementById('registerForm')?.addEventListener('submit', async function(e) {
-                    e.preventDefault();
-                    
-                    const submitBtn = document.getElementById('registerSubmitBtn');
-                    if (!submitBtn) {
-                        console.error('زر الإنشاء غير موجود');
-                        return;
-                    }
-                    
-                    // التحقق إذا كان الزر معطلاً (يتم معالجة طلب سابق)
-                    if (submitBtn.disabled) {
-                        console.log('جاري معالجة طلب سابق، الرجاء الانتظار...');
-                        return;
-                    }
-                    
-                    // تعطيل الزر لمنع الضغط المتكرر
-                    submitBtn.disabled = true;
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري إنشاء الحساب...';
-                    
-                    const name = document.getElementById('registerName').value;
-                    const email = document.getElementById('registerEmail').value;
-                    const password = document.getElementById('registerPassword').value;
-                    const mobile = document.getElementById('registerMobile').value;
-                    const role = document.getElementById('registerRole').value;
-                    const errorMsgDiv = document.getElementById('registerErrorMsg');
-                    
-                    // إخفاء رسالة الخطأ السابقة
-                    if (errorMsgDiv) {
-                        errorMsgDiv.style.display = 'none';
-                        errorMsgDiv.textContent = '';
-                    }
-                    
-                    // التحقق من ملء جميع الحقول الأساسية
-                    if (!name || !email || !password || !mobile || !role) {
-                        showError('❌ الرجاء ملء جميع الحقول المطلوبة');
-                        resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
-                        return;
-                    }
-                    
-                    // التحقق من صحة البريد الإلكتروني
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailRegex.test(email)) {
-                        showError('❌ البريد الإلكتروني غير صالح');
-                        resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
-                        return;
-                    }
-                    
-                    if (password.length < 6) {
-                        showError('❌ كلمة المرور يجب أن تكون 6 أحرف على الأقل');
-                        resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
-                        return;
-                    }
-                    
-                    // التحقق من بيانات إضافية حسب الصفة
-                    if (role === 'وسيط') {
-                        const mediatorTypeValue = document.getElementById('mediatorType').value;
-                        if (!mediatorTypeValue) {
-                            showError('❌ الرجاء اختيار نوع الوسيط');
-                            resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
-                            return;
-                        }
-                        
-                        if (mediatorTypeValue === 'شركة') {
-                            const companyName = document.getElementById('companyName').value;
-                            if (!companyName) {
-                                showError('❌ الرجاء إدخال اسم الشركة');
-                                resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
-                                return;
-                            }
-                        }
-                    } else if (role === 'مطور') {
-                        if (!developerInfo.companyName || !developerInfo.companyAddress) {
-                            showError('❌ الرجاء إدخال معلومات الشركة للمطور');
-                            if (developerOverlay) developerOverlay.classList.add('active');
-                            resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
-                            return;
-                        }
-                    } else if (role === 'شركة') {
-                        const companyName = document.getElementById('companyName').value;
-                        if (!companyName) {
-                            showError('❌ الرجاء إدخال اسم الشركة');
-                            resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
-                            return;
-                        }
-                    }
-                    
-                    try {
-                        // التحقق من أن البريد الإلكتروني والموبايل لم يتم استخدامهما من قبل
-                        if (supabaseClient) {
-                            try {
-                                // التحقق من البريد الإلكتروني
-                                const { data: emailCheck, error: emailError } = await supabaseClient
-                                    .from('users')
-                                    .select('id', { count: 'exact' })
-                                    .eq('email', email);
-                                
-                                if (!emailError && emailCheck && emailCheck.length > 0) {
-                                    showError('❌ هذا البريد الإلكتروني مستخدم من قبل! يرجى استخدام بريد آخر.');
-                                    resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
-                                    return;
-                                }
-                                
-                                // التحقق من رقم الموبايل
-                                const { data: mobileCheck, error: mobileError } = await supabaseClient
-                                    .from('users')
-                                    .select('id', { count: 'exact' })
-                                    .eq('mobile', mobile);
-                                
-                                if (!mobileError && mobileCheck && mobileCheck.length > 0) {
-                                    showError('❌ رقم الموبايل مستخدم من قبل! يرجى استخدام رقم آخر.');
-                                    resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
-                                    return;
-                                }
-                            } catch (checkError) {
-                                console.warn('Error checking email/mobile:', checkError);
-                                // الاستمرار حتى لو فشل التحقق
-                            }
-                        }
-                        
-                        // رفع صورة شعار الشركة إذا وجدت
-                        let logoUrl = '';
-                        if (companyLogoFile && supabaseClient) {
-                            try {
-                                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري رفع الصورة...';
-                                
-                                const fileExt = companyLogoFile.name.split('.').pop();
-                                const fileName = `company_logo_${Date.now()}.${fileExt}`;
-                                
-                                const { data, error } = await supabaseClient.storage
-                                    .from('company-logos')
-                                    .upload(fileName, companyLogoFile);
-                                
-                                if (!error) {
-                                    const { data: urlData } = supabaseClient.storage
-                                        .from('company-logos')
-                                        .getPublicUrl(fileName);
-                                    
-                                    logoUrl = urlData.publicUrl;
-                                }
-                            } catch (uploadError) {
-                                console.warn('Failed to upload logo:', uploadError);
-                            }
-                        }
-                        
-                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري إنشاء الحساب...';
-                        
-                        // محاولة التسجيل عبر Supabase
-                        let signUpResult = null;
-                        let userId = null;
-                        
-                        if (supabaseClient) {
-                            try {
-                                signUpResult = await supabaseClient.auth.signUp({
-                                    email: email,
-                                    password: password
-                                });
-                                
-                                if (signUpResult.error) {
-                                    throw new Error(signUpResult.error.message);
-                                }
-                                
-                                userId = signUpResult.data?.user?.id;
-                                
-                                // تجميع بيانات المستخدم
-                                const userProfile = {
-                                    email: email,
-                                    name: name,
-                                    mobile: mobile,
-                                    role: role,
-                                    created_at: new Date().toISOString()
-                                };
-                                
-                                // إضافة بيانات إضافية حسب الصفة
-                                if (role === 'وسيط') {
-                                    const mediatorTypeValue = document.getElementById('mediatorType')?.value || '';
-                                    userProfile.mediator_type = mediatorTypeValue || 'none';
-                                    if (mediatorTypeValue === 'شركة') {
-                                        userProfile.company_name = document.getElementById('companyName')?.value || 'none';
-                                        userProfile.company_logo = logoUrl || 'none';
-                                    } else {
-                                        userProfile.company_name = 'none';
-                                        userProfile.company_logo = 'none';
-                                    }
-                                } else if (role === 'مطور') {
-                                    userProfile.company_name = developerInfo.companyName || 'none';
-                                    userProfile.company_address = developerInfo.companyAddress || 'none';
-                                    userProfile.mediator_type = 'none';
-                                    userProfile.company_logo = 'none';
-                                } else if (role === 'شركة') {
-                                    userProfile.company_name = document.getElementById('companyName')?.value || 'none';
-                                    userProfile.company_logo = logoUrl || 'none';
-                                    userProfile.mediator_type = 'none';
-                                    userProfile.company_address = 'none';
-                                } else {
-                                    // لأدوار أخرى
-                                    userProfile.mediator_type = 'none';
-                                    userProfile.company_name = 'none';
-                                    userProfile.company_logo = 'none';
-                                    userProfile.company_address = 'none';
-                                }
-                                
-                                console.log('User profile to insert:', userProfile);
-                                
-                                // حفظ بيانات المستخدم في جدول users
-                                const { data: insertedData, error: insertError } = await supabaseClient
-                                    .from('users')
-                                    .insert([userProfile]);
-                                    
-                                if (insertError) {
-                                    console.error('Database error details:', {
-                                        message: insertError.message,
-                                        details: insertError.details,
-                                        hint: insertError.hint,
-                                        code: insertError.code
-                                    });
-                                    throw new Error(`خطأ في حفظ البيانات: ${insertError.message}`);
-                                } else {
-                                    console.log('User profile inserted successfully:', insertedData);
-                                    localStorage.setItem('userData', JSON.stringify(userProfile));
-                                }
-                            } catch (authError) {
-                                console.warn('Supabase registration failed:', authError);
-                                throw authError;
-                            }
-                        }
-                        
-                        // عرض نجاح التسجيل
-                        submitBtn.innerHTML = '<i class="fas fa-check"></i> تم إنشاء الحساب بنجاح';
-                        submitBtn.style.backgroundColor = '#2ecc71';
-                        
-                        // حفظ بيانات المستخدم محلياً
-                        localStorage.setItem('isLoggedIn', 'true');
-                        localStorage.setItem('username', name);
-                        
-                        setTimeout(() => {
-                            // بعد التسجيل الناجح، تحويل إلى تسجيل الدخول
-                            if (animatedContainer) animatedContainer.classList.remove('active');
-                            document.getElementById('loginEmail').value = email;
-                            document.getElementById('registerForm').reset();
-                            
-                            // إعادة تعيين الزر إلى حالته الأصلية
-                            setTimeout(() => {
-                                resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
-                                submitBtn.style.backgroundColor = '';
-                                
-                                // إعادة تعيين المتغيرات
-                                companyLogoFile = null;
-                                companyLogoUrl = '';
-                                if (logoPreview) {
-                                    logoPreview.innerHTML = '';
-                                    logoPreview.style.display = 'none';
-                                }
-                                developerInfo = { companyName: '', companyAddress: '' };
-                                
-                                // إخفاء الحقول الإضافية
-                                if (mediatorFields) mediatorFields.classList.remove('show');
-                                if (companyFields) companyFields.classList.remove('show');
-                            }, 1000);
-                        }, 1500);
-                    } catch (error) {
-                        console.error('Registration error:', error);
-                        
-                        let errorMessage = error.message || 'حدث خطأ أثناء إنشاء الحساب';
-                        
-                        // رسائل خطأ مفصلة
-                        if (error.message.includes('Database')) {
-                            errorMessage = 'خطأ في قاعدة البيانات. تأكد من أن جدول users موجود بالأعمدة الصحيحة.';
-                        } else if (error.message.includes('security')) {
-                            errorMessage = 'يرجى الانتظار قبل المحاولة مجددًا (تحديد السرعة من Supabase).';
-                        } else if (error.message.includes('Invalid')) {
-                            errorMessage = 'بيانات غير صالحة. يرجى التحقق من البريد الإلكتروني وكلمة المرور.';
-                        }
-                        
-                        showError('❌ ' + errorMessage);
-                        resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
-                    }
-                    
-                    // دالة لعرض الأخطاء
-                    function showError(message) {
-                        if (errorMsgDiv) {
-                            errorMsgDiv.textContent = message;
-                            errorMsgDiv.style.display = 'block';
-                            
-                            // إخفاء رسالة الخطأ بعد 5 ثواني
-                            setTimeout(() => {
-                                if (errorMsgDiv) {
-                                    errorMsgDiv.style.display = 'none';
-                                    errorMsgDiv.textContent = '';
-                                }
-                            }, 5000);
-                        }
-                    }
-                    
-                    // دالة لإعادة تعيين حالة الزر
-                    function resetSubmitButton(button, originalHTML) {
-                        button.disabled = false;
-                        button.innerHTML = originalHTML;
-                    }
-                });
-
-            // ===== تسجيل الخروج =====
-            logoutBtn?.addEventListener('click', function() {
-                // تسجيل الخروج من Supabase
-                if (supabaseClient) {
-                    supabaseClient.auth.signOut();
-                }
-                
-                // مسح البيانات المحلية
-                localStorage.removeItem('isLoggedIn');
-                localStorage.removeItem('username');
-                localStorage.removeItem('userData');
-                
-                userWelcome.textContent = 'مرحباً بك في HOME LAND';
-                if (loginHeaderBtn) loginHeaderBtn.style.display = 'block';
-                if (logoutBtn) logoutBtn.style.display = 'none';
-            });
-
-            // ===== مسح فلاتر البحث =====
-            const clearFiltersBtn = document.querySelector('.btn-secondary');
-            if (clearFiltersBtn && clearFiltersBtn.textContent.includes('مسح الفلاتر')) {
-                clearFiltersBtn.addEventListener('click', function() {
-                    document.querySelectorAll('.search-filters select, .search-filters input').forEach(el => {
-                        if (el.tagName === 'SELECT') el.selectedIndex = 0;
-                        if (el.tagName === 'INPUT') el.value = '';
-                    });
-                });
+                reader.readAsDataURL(file);
             }
+        });
 
-            // ===== تحسين عرض المحافظات =====
-            const originalSelect = document.getElementById('city');
-            const citySelect = document.getElementById('citySelect');
-            const cityBtn = document.getElementById('cityBtn');
-            const cityDropdown = document.getElementById('cityDropdown');
-            const cityGrid = document.getElementById('cityGrid');
-            const citySearch = document.getElementById('citySearch');
-            const cityBtnText = document.getElementById('cityBtnText');
-            const neighborhoodGroup = document.getElementById('neighborhoodGroup');
-            const neighborhoodSelect = document.getElementById('neighborhood');
+        // إدارة نافذة المطور
+        closeDeveloperPopup?.addEventListener('click', function() {
+            if (developerOverlay) developerOverlay.classList.remove('active');
+            if (registerRole) registerRole.value = '';
+        });
 
-            // خريطة الأحياء لكل محافظة
-            const neighborhoodsMap = {
-                'كل المحافظات': {},
-                'السادات': {
-                    'المنطقة الذهبية': ['14', '22', '21', '29'],
-                    'الحي المتميز': [],
-                    'بيت الوطن': [],
-                    'أحياء حكومية/سكنية قديمة': ['المنطقة الأولى', 'المنطقة الثانية', 'المنطقة الرابعة', 'المنطقة الحادية عشرة'],
-                    'أحياء أخرى': ['حي الفردوس', 'حي النخيل', 'حي النرجس', 'حي الكوثر']
-                },
-                'أكتوبر الجديدة': {'الحي الأول': [], 'الحي الثاني': [], 'الحي الثالث': []},
-                'أسوان الجديدة': {'المنطقة الأولى': [], 'المنطقة الثانية': [], 'الحي السياحي': []},
-                '15 مايو': {'الحي الأول': [], 'الحي الثاني': [], 'المنطقة الصناعية': []},
-                'العبور الجديدة': {'المنطقة A': [], 'المنطقة B': [], 'المنطقة C': []},
-                'العاشر من رمضان': {'الحي الأول': [], 'الحي الثاني': [], 'الحي الثالث': [], 'المناطق الصناعية': []},
-                'الشروق': {'الشروق - الحي الأول': [], 'الشروق - الحي الثاني': [], 'الحي التجاري': []},
-                'السادس من أكتوبر': {'الحي الأول': [], 'الحى السابع': [], 'مدينة 6 أكتوبر - منطقة عباس': [], 'التجمع الخامس (قريب)': []},
-                'بدر': {'الحي الأول': [], 'الحي الثاني': []},
-                'المنيا الجديدة': {'القطاعات السكنية 1': [], 'القطاعات السكنية 2': []},
-                'المنصورة الجديدة': {'المنطقة السكنية A': [], 'المنطقة السكنية B': []},
-                'العلمين الجديدة': {'المنطقة الساحلية': [], 'المنطقة السكنية': []},
-                'سفنكس الجديدة': {'الحي الأول': [], 'الحي الثاني': []},
-                'دمياط الجديدة': {'المنطقة السكنية': [], 'المنطقة الصناعية': []},
-                'بني سويف الجديدة': {'الحي الأول': [], 'الحي الثاني': []},
-                'برج العرب الجديدة': {'المنطقة السكنية': [], 'المنطقة الصناعية': []},
-                'ناصر الجديدة - غرب اسوان': {'الحي الأول': [], 'الحي الثاني': []},
-                'قنا الجديدة': {'الحي الأول': [], 'الحي الثاني': []},
-                'سوهاج الجديدة': {'الحي الأول': [], 'الحي الثاني': []},
-                'التجمع': {'التجمع الخامس': [], 'التجمع الثالث': [], 'التجمع الأول': []},
-                'الإسكندرية': {'كل الأحياء': [], 'سموحة': [], 'ستانلي': [], 'سيدى جابر': [], 'العجمي': [], 'المنتزه': [], 'وسط المدينة': []},
-                'الإسماعيلية': {'كل الأحياء': [], 'فايد': [], 'القنطرة شرق': [], 'القنطرة غرب': []},
-                'أسوان': {'كل الأحياء': [], 'جبل سلع': [], 'الكورنيش': [], 'النوبة': []},
-                'أسيوط': {'كل الأحياء': [], 'أسيوط الجديدة': [], 'المنفلوطي': [], 'ديروط': []},
-                'الأقصر': {'كل الأحياء': [], 'حي الكرنك': [], 'الطود': [], 'القرنة': []},
-                'البحر الأحمر': {'الغردقة': [], 'مرسى علم': [], 'القصير': [], 'الشرم': []},
-                'البحيرة': {'دمنهور': [], 'كفر الدوار': [], 'رشيد': [], 'إدكو': []},
-                'بني سويف': {'بنى سويف': [], 'الواسطى': [], 'ناصر': [], 'ببا': [], 'الفشن': []},
-                'بورسعيد': {'الحي القديم': [], 'الضواحى': [], 'الجنوب': [], 'الشرق': []},
-                'جنوب سيناء': {'شرم الشيخ': [], 'دهب': [], 'نويبع': [], 'طابا': []},
-                'الجيزة': {'الهرم': [], 'الدقى': [], 'الشيخ زايد': [], 'الجيزة': [], 'الهرم - مناطق التوسعة': []},
-                'الدقهلية': {'المنصورة': [], 'طلخا': [], 'ميت غمر': [], 'بلقاس': [], 'دكرنس': []},
-                'دمياط': {'دمياط': [], 'دمياط الجديدة': [], 'فارسكور': [], 'السوكري': []},
-                'سوهاج': {'سوهاج': [], 'أخميم': [], 'البلينا': [], 'جرجا': []},
-                'السويس': {'السويس - الحي الأول': [], 'السويس - الحي الثاني': [], 'الزراعى': []},
-                'الشرقية': {'الزقازيق': [], 'القصاصين': [], 'بلبيس': [], 'فاقوس': [], 'منيا القمح': []},
-                'شمال سيناء': {'العريش': [], 'الشيخ زويد': [], 'رفح': []},
-                'الغربية': {'طنطا': [], 'المحلة الكبرى': [], 'كفر الزيات': [], 'زفتى': []},
-                'الفيوم': {'الفيوم': [], 'طامية': [], 'سنورس': [], 'إطسا': []},
-                'القاهرة': {'كل الأحياء': [], 'وسط المدينة': [], 'الزمالك': [], 'المعادي': [], 'مدينة نصر': [], 'المقطم': [], 'حلوان': [], 'المعصرة': [], 'السلام': []},
-                'القليوبية': {'شبرا الخيمة': [], 'بنها': [], 'قها': [], 'القناطر الخيرية': [], 'الخانكة': []},
-                'قنا': {'قنا': [], 'دشنا': [], 'نقادة': [], 'قفط': []},
-                'كفر الشيخ': {'كفر الشيخ': [], 'دسوق': [], 'بلطيم': [], 'مطوبس': [], 'بيلا': []},
-                'مطروح': {'مرسى مطروح': [], 'الحمام': [], 'النجيلة': [], 'الضبعة': []},
-                'المنوفية': {'شبين الكوم': [], 'مدينة السادات': [], 'منوف': [], 'قويسنا': []},
-                'المنيا': {'المنيا': [], 'مركز المنيا': [], 'مطاي': [], 'ملوي': []},
-                'الوادي الجديد': {'الخارجة': [], 'باريس': [], 'الفرافرة': [], 'بلاط': []}
+        saveDeveloperInfo?.addEventListener('click', function() {
+            const companyName = developerCompanyName?.value?.trim() || '';
+            const companyAddress = developerCompanyAddress?.value?.trim() || '';
+            
+            if (!companyName || !companyAddress) {
+                alert('الرجاء ملء جميع الحقول');
+                return;
+            }
+            
+            developerInfo = {
+                companyName: companyName,
+                companyAddress: companyAddress
             };
+            
+            if (developerOverlay) developerOverlay.classList.remove('active');
+            alert('تم حفظ معلومات الشركة بنجاح!');
+        });
 
-            // ملء قائمة المحافظات
-            function populateCities() {
-                cityGrid.innerHTML = '';
-                Array.from(originalSelect.options).forEach(opt => {
-                    const btn = document.createElement('button');
-                    btn.type = 'button';
-                    btn.className = 'city-item';
-                    btn.textContent = opt.textContent;
-                    btn.dataset.value = opt.textContent;
-                    if (opt.selected) btn.classList.add('active');
-                    btn.addEventListener('click', () => {
-                        for (let i = 0; i < originalSelect.options.length; i++) {
-                            if (originalSelect.options[i].text === btn.dataset.value) {
-                                originalSelect.selectedIndex = i;
-                                break;
-                            }
-                        }
-                        originalSelect.dispatchEvent(new Event('change'));
-                        cityBtnText.textContent = btn.dataset.value;
-                        cityDropdown.classList.remove('open');
-                        cityDropdown.setAttribute('aria-hidden', 'true');
-                        cityGrid.querySelectorAll('.city-item').forEach(ci => ci.classList.remove('active'));
-                        btn.classList.add('active');
-                    });
-                    cityGrid.appendChild(btn);
-                });
+        // ===== معالجة تسجيل الدخول =====
+        document.getElementById('loginForm')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                alert('الرجاء ملء جميع الحقول');
+                return;
             }
+            
+            const submitBtn = this.querySelector('.animated-btn');
+            if (!submitBtn) {
+                alert('خطأ: لم يتم العثور على زر الإرسال');
+                return;
+            }
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الدخول...';
+            
+            try {
+                // محاولة تسجيل الدخول عبر Supabase
+                let loginResult = null;
+                if (supabaseClient) {
+                    try {
+                        loginResult = await supabaseClient.auth.signInWithPassword({
+                            email: email,
+                            password: password
+                        });
+                        
+                        if (loginResult.error) {
+                            throw new Error(loginResult.error.message);
+                        }
+                        
+                        // جلب بيانات المستخدم
+                        const { data: userData, error: userError } = await supabaseClient
+                            .from('users')
+                            .select('*')
+                            .eq('email', email)
+                            .single();
+                            
+                        if (!userError && userData) {
+                            localStorage.setItem('userData', JSON.stringify(userData));
+                            currentUser = {
+                                id: loginResult.data.user.id,
+                                email: email,
+                                name: userData.name || email.split('@')[0],
+                                profile: userData
+                            };
+                        } else {
+                            currentUser = {
+                                id: loginResult.data.user.id,
+                                email: email,
+                                name: email.split('@')[0]
+                            };
+                        }
+                        
+                    } catch (authError) {
+                        console.warn('Supabase auth failed, using local storage', authError);
+                    }
+                }
+                
+                // حفظ بيانات المستخدم محلياً
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', email.split('@')[0] || 'مستخدم');
+                
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> تم الدخول بنجاح';
+                
+                setTimeout(() => {
+                    loginOverlay.classList.remove('active');
+                    updateUIForLoggedInUser();
+                    document.getElementById('loginForm').reset();
+                    submitBtn.innerHTML = originalText;
+                    
+                    // تحميل الطروحات بعد تسجيل الدخول
+                    loadFeaturedOffers();
+                }, 1000);
+            } catch (error) {
+                alert('خطأ في تسجيل الدخول: ' + error.message);
+                submitBtn.innerHTML = originalText;
+            }
+        });
 
-            populateCities();
-
-            // ملء الأحياء بناءً على المحافظة المختارة
-            function populateNeighborhoods(cityName) {
-                neighborhoodSelect.innerHTML = '';
-                const data = neighborhoodsMap[cityName];
-                if (!data) {
-                    neighborhoodSelect.innerHTML = '<option>لا توجد بيانات أحياء لهذه المحافظة</option>';
-                    neighborhoodGroup.classList.remove('show');
+        // ===== معالجة التسجيل =====
+        document.getElementById('registerForm')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('registerSubmitBtn');
+            if (!submitBtn) {
+                console.error('زر الإنشاء غير موجود');
+                return;
+            }
+            
+            if (submitBtn.disabled) {
+                console.log('جاري معالجة طلب سابق، الرجاء الانتظار...');
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري إنشاء الحساب...';
+            
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const mobile = document.getElementById('registerMobile').value;
+            const role = document.getElementById('registerRole').value;
+            const errorMsgDiv = document.getElementById('registerErrorMsg');
+            
+            if (errorMsgDiv) {
+                errorMsgDiv.style.display = 'none';
+                errorMsgDiv.textContent = '';
+            }
+            
+            if (!name || !email || !password || !mobile || !role) {
+                showError('❌ الرجاء ملء جميع الحقول المطلوبة');
+                resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
+                return;
+            }
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showError('❌ البريد الإلكتروني غير صالح');
+                resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showError('❌ كلمة المرور يجب أن تكون 6 أحرف على الأقل');
+                resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
+                return;
+            }
+            
+            if (role === 'وسيط') {
+                const mediatorTypeValue = document.getElementById('mediatorType').value;
+                if (!mediatorTypeValue) {
+                    showError('❌ الرجاء اختيار نوع الوسيط');
+                    resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
                     return;
                 }
-
-                const neighborhoodsObj = Array.isArray(data) ? Object.fromEntries(data.map(n => [n, []])) : data;
-
-                Object.keys(neighborhoodsObj).forEach(neighborhood => {
-                    const areas = neighborhoodsObj[neighborhood];
-                    if (areas.length > 0) {
-                        const optgroup = document.createElement('optgroup');
-                        optgroup.label = neighborhood;
-                        areas.forEach(area => {
-                            const o = document.createElement('option');
-                            o.textContent = area;
-                            o.value = `${neighborhood}|${area}`;
-                            optgroup.appendChild(o);
-                        });
-                        neighborhoodSelect.appendChild(optgroup);
-                    } else {
-                        const o = document.createElement('option');
-                        o.textContent = neighborhood;
-                        o.value = neighborhood;
-                        neighborhoodSelect.appendChild(o);
+                
+                if (mediatorTypeValue === 'شركة') {
+                    const companyName = document.getElementById('companyName').value;
+                    if (!companyName) {
+                        showError('❌ الرجاء إدخال اسم الشركة');
+                        resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
+                        return;
                     }
-                });
-
-                neighborhoodGroup.classList.add('show');
+                }
+            } else if (role === 'مطور') {
+                if (!developerInfo.companyName || !developerInfo.companyAddress) {
+                    showError('❌ الرجاء إدخال معلومات الشركة للمطور');
+                    if (developerOverlay) developerOverlay.classList.add('active');
+                    resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
+                    return;
+                }
+            } else if (role === 'شركة') {
+                const companyName = document.getElementById('companyName').value;
+                if (!companyName) {
+                    showError('❌ الرجاء إدخال اسم الشركة');
+                    resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
+                    return;
+                }
             }
-
-            // عند تغيير المحافظة
-            originalSelect.addEventListener('change', function() {
-                const sel = originalSelect.options[originalSelect.selectedIndex].text;
-                if (sel === 'كل المحافظات') {
-                    neighborhoodGroup.classList.remove('show');
-                    neighborhoodSelect.innerHTML = '<option>اختر المحافظة أولاً</option>';
-                } else {
-                    populateNeighborhoods(sel);
+            
+            try {
+                // رفع صورة شعار الشركة إذا وجدت
+                let logoUrl = '';
+                if (companyLogoFile && supabaseClient) {
+                    try {
+                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري رفع الصورة...';
+                        
+                        const fileExt = companyLogoFile.name.split('.').pop();
+                        const fileName = `company_logo_${Date.now()}.${fileExt}`;
+                        
+                        const { data, error } = await supabaseClient.storage
+                            .from('company-logos')
+                            .upload(fileName, companyLogoFile);
+                        
+                        if (!error) {
+                            const { data: urlData } = supabaseClient.storage
+                                .from('company-logos')
+                                .getPublicUrl(fileName);
+                            
+                            logoUrl = urlData.publicUrl;
+                        }
+                    } catch (uploadError) {
+                        console.warn('Failed to upload logo:', uploadError);
+                    }
                 }
-                const activeGridItem = cityGrid.querySelector(`.city-item[data-value="${sel}"]`);
-                if (activeGridItem) {
-                    cityGrid.querySelectorAll('.city-item').forEach(ci => ci.classList.remove('active'));
-                    activeGridItem.classList.add('active');
-                    cityBtnText.textContent = sel;
+                
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري إنشاء الحساب...';
+                
+                // محاولة التسجيل عبر Supabase
+                let signUpResult = null;
+                let userId = null;
+                
+                if (supabaseClient) {
+                    try {
+                        // 1. إنشاء حساب المصادقة
+                        signUpResult = await supabaseClient.auth.signUp({
+                            email: email,
+                            password: password
+                        });
+                        
+                        if (signUpResult.error) {
+                            throw new Error(signUpResult.error.message);
+                        }
+                        
+                        userId = signUpResult.data?.user?.id;
+                        
+                        // 2. تجميع بيانات المستخدم
+                        const userProfile = {
+                            auth_id: userId,
+                            email: email,
+                            name: name,
+                            mobile: mobile,
+                            role: role,
+                            created_at: new Date().toISOString()
+                        };
+                        
+                        // إضافة بيانات إضافية حسب الصفة
+                        if (role === 'وسيط') {
+                            const mediatorTypeValue = document.getElementById('mediatorType')?.value || '';
+                            userProfile.mediator_type = mediatorTypeValue || 'none';
+                            if (mediatorTypeValue === 'شركة') {
+                                userProfile.company_name = document.getElementById('companyName')?.value || 'none';
+                                userProfile.company_logo = logoUrl || 'none';
+                            } else {
+                                userProfile.company_name = 'none';
+                                userProfile.company_logo = 'none';
+                            }
+                            userProfile.company_address = 'none';
+                        } else if (role === 'مطور') {
+                            userProfile.company_name = developerInfo.companyName || 'none';
+                            userProfile.company_address = developerInfo.companyAddress || 'none';
+                            userProfile.mediator_type = 'none';
+                            userProfile.company_logo = 'none';
+                        } else if (role === 'شركة') {
+                            userProfile.company_name = document.getElementById('companyName')?.value || 'none';
+                            userProfile.company_logo = logoUrl || 'none';
+                            userProfile.mediator_type = 'none';
+                            userProfile.company_address = 'none';
+                        } else {
+                            userProfile.mediator_type = 'none';
+                            userProfile.company_name = 'none';
+                            userProfile.company_logo = 'none';
+                            userProfile.company_address = 'none';
+                        }
+                        
+                        // 3. حفظ في جدول users
+                        const { data: insertedData, error: insertError } = await supabaseClient
+                            .from('users')
+                            .insert([userProfile]);
+                            
+                        if (insertError) {
+                            throw new Error(`خطأ في حفظ البيانات: ${insertError.message}`);
+                        }
+                        
+                        // 4. تسجيل الدخول تلقائياً
+                        const loginResult = await supabaseClient.auth.signInWithPassword({
+                            email: email,
+                            password: password
+                        });
+
+                        if (loginResult.data?.user) {
+                            currentUser = {
+                                id: loginResult.data.user.id,
+                                email: email,
+                                name: name,
+                                profile: userProfile
+                            };
+                            
+                            localStorage.setItem('userData', JSON.stringify(userProfile));
+                        }
+                        
+                    } catch (authError) {
+                        console.warn('Supabase registration failed:', authError);
+                        throw authError;
+                    }
                 }
-            });
+                
+                // عرض نجاح التسجيل
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> تم إنشاء الحساب بنجاح';
+                submitBtn.style.backgroundColor = '#2ecc71';
+                
+                // حفظ بيانات المستخدم محلياً
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', name);
+                
+                setTimeout(() => {
+                    // بعد التسجيل الناجح
+                    if (animatedContainer) animatedContainer.classList.remove('active');
+                    document.getElementById('loginEmail').value = email;
+                    document.getElementById('registerForm').reset();
+                    
+                    // تحديث واجهة المستخدم
+                    updateUIForLoggedInUser();
+                    
+                    // إعادة تعيين الزر
+                    setTimeout(() => {
+                        resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
+                        submitBtn.style.backgroundColor = '';
+                        
+                        // إعادة تعيين المتغيرات
+                        companyLogoFile = null;
+                        companyLogoUrl = '';
+                        if (logoPreview) {
+                            logoPreview.innerHTML = '';
+                            logoPreview.style.display = 'none';
+                        }
+                        developerInfo = { companyName: '', companyAddress: '' };
+                        
+                        // إخفاء الحقول الإضافية
+                        if (mediatorFields) mediatorFields.classList.remove('show');
+                        if (companyFields) companyFields.classList.remove('show');
+                    }, 1000);
+                }, 1500);
+            } catch (error) {
+                console.error('Registration error:', error);
+                
+                let errorMessage = error.message || 'حدث خطأ أثناء إنشاء الحساب';
+                
+                if (error.message.includes('Database')) {
+                    errorMessage = 'خطأ في قاعدة البيانات. تأكد من أن جدول users موجود بالأعمدة الصحيحة.';
+                } else if (error.message.includes('security')) {
+                    errorMessage = 'يرجى الانتظار قبل المحاولة مجددًا (تحديد السرعة من Supabase).';
+                } else if (error.message.includes('Invalid')) {
+                    errorMessage = 'بيانات غير صالحة. يرجى التحقق من البريد الإلكتروني وكلمة المرور.';
+                }
+                
+                showError('❌ ' + errorMessage);
+                resetSubmitButton(submitBtn, '<i class="fas fa-user-plus"></i> إنشاء حساب');
+            }
+            
+            function showError(message) {
+                if (errorMsgDiv) {
+                    errorMsgDiv.textContent = message;
+                    errorMsgDiv.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        if (errorMsgDiv) {
+                            errorMsgDiv.style.display = 'none';
+                            errorMsgDiv.textContent = '';
+                        }
+                    }, 5000);
+                }
+            }
+            
+            function resetSubmitButton(button, originalHTML) {
+                button.disabled = false;
+                button.innerHTML = originalHTML;
+            }
+        });
 
-            // فتح/إغلاق قائمة المحافظات
-            cityBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                cityDropdown.classList.toggle('open');
-                cityDropdown.setAttribute('aria-hidden', !cityDropdown.classList.contains('open'));
-                if (cityDropdown.classList.contains('open')) citySearch.focus();
-            });
+        // ===== تسجيل الخروج =====
+        logoutBtn?.addEventListener('click', async function() {
+            // تسجيل الخروج من Supabase
+            if (supabaseClient) {
+                await supabaseClient.auth.signOut();
+            }
+            
+            // مسح البيانات المحلية
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('username');
+            localStorage.removeItem('userData');
+            
+            // إعادة تعيين المستخدم الحالي
+            currentUser = null;
+            
+            userWelcome.textContent = 'مرحباً بك في HOME LAND';
+            if (loginHeaderBtn) loginHeaderBtn.style.display = 'block';
+            if (logoutBtn) logoutBtn.style.display = 'none';
+            
+            // إعادة تحميل الطروحات
+            loadFeaturedOffers();
+        });
 
-            // البحث في المحافظات
-            citySearch.addEventListener('input', function() {
-                const q = citySearch.value.trim().toLowerCase();
-                cityGrid.querySelectorAll('.city-item').forEach(it => {
-                    const txt = it.textContent.trim().toLowerCase();
-                    it.style.display = txt.includes(q) ? '' : 'none';
+        // ===== إدارة الطروحات =====
+        
+        // دالة لتحميل الطروحات المميزة
+        async function loadFeaturedOffers() {
+            const grid = document.getElementById('featuredOffersGrid');
+            if (!grid) return;
+            
+            try {
+                // جلب أحدث 6 طروحات نشطة
+                const { data: offers, error } = await supabaseClient
+                    .from('property_offers')
+                    .select('*')
+                    .eq('status', 'active')
+                    .order('excellence_percentage', { ascending: false })
+                    .limit(6);
+                
+                if (error) throw error;
+                
+                if (!offers || offers.length === 0) {
+                    grid.innerHTML = `
+                        <div class="no-offers-message">
+                            <i class="fas fa-home"></i>
+                            <h3>لا يوجد عروض حالياً</h3>
+                            <p>كن أول من يضيف عرض جديد للمنصة</p>
+                        </div>
+                    `;
+                    
+                    document.getElementById('addOfferBtnNoOffers')?.addEventListener('click', function() {
+                        checkLoginBeforeAddOffer();
+                    });
+                    return;
+                }
+                
+                grid.innerHTML = '';
+                
+                offers.forEach(offer => {
+                    const card = createOfferCard(offer);
+                    grid.appendChild(card);
                 });
-            });
+                
+            } catch (error) {
+                console.error('Error loading offers:', error);
+                grid.innerHTML = `
+                    <div class="no-offers-message">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>حدث خطأ في تحميل الطروحات</h3>
+                        <p>يرجى المحاولة مرة أخرى لاحقاً</p>
+                    </div>
+                `;
+            }
+        }
 
-            // إغلاق القائمة عند النقر خارجها
-            document.addEventListener('click', function(e) {
-                if (!citySelect.contains(e.target) && cityDropdown.classList.contains('open')) {
+        // إنشاء بطاقة عرض
+        function createOfferCard(offer) {
+            const isHouse = offer.property_type === 'house';
+            const typeText = isHouse ? 'شقة/منزل' : 'أرض';
+            const locationText = `في ${offer.governorate || 'محافظة'}`;
+            const icon = isHouse ? 'fa-building' : 'fa-mountain';
+            const imageUrl = offer.image_url || (isHouse ? 
+                'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' : 
+                'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+            
+            // تنسيق الأسعار
+            const formattedOffer = new Intl.NumberFormat('ar-EG').format(offer.offer_price_egp) + ' ج.م';
+            const formattedPaid = new Intl.NumberFormat('ar-EG').format(offer.paid_amount);
+            const paidCurrencySymbol = offer.paid_currency === 'USD' ? '$' : 'ج.م';
+            
+            const card = document.createElement('article');
+            card.className = 'property-card offer-card-special';
+            card.innerHTML = `
+                <span class="offer-excellence-badge">تميز ${offer.excellence_percentage || 0}%</span>
+                <img src="${imageUrl}" alt="${typeText}" class="property-img">
+                <div class="property-content">
+                    <div class="property-header">
+                        <h3>${typeText} ${locationText}</h3>
+                        <div class="property-price">${formattedOffer}</div>
+                    </div>
+                    
+                    <div class="offer-payment-info">
+                        <span class="payment-badge ${offer.paid_currency ? offer.paid_currency.toLowerCase() : 'egp'}">
+                            المدفوع: ${formattedPaid} ${paidCurrencySymbol}
+                        </span>
+                    </div>
+                    
+                    <div class="property-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-expand-arrows-alt"></i> ${offer.area} م²
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas ${icon}"></i> ${typeText}
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i> ${offer.governorate}
+                        </div>
+                    </div>
+                    
+                    <div class="property-footer">
+                        <span class="property-type">
+                            ${new Date(offer.created_at).toLocaleDateString('ar-EG')}
+                        </span>
+                        <button class="property-link view-offer-btn" data-offer-id="${offer.id}">
+                            المزيد <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // إضافة مستمع الحدث للزر
+            card.querySelector('.view-offer-btn').addEventListener('click', function() {
+                const offerId = this.getAttribute('data-offer-id');
+                viewOfferDetails(offerId);
+            });
+            
+            return card;
+        }
+
+        // دالة لعرض تفاصيل الطروحة
+        async function viewOfferDetails(offerId) {
+            if (!currentUser) {
+                // إذا لم يكن مسجل دخول، فتح شاشة التسجيل
+                loginOverlay.classList.add('active');
+                animatedContainer.classList.remove('active');
+                alert('يرجى تسجيل الدخول لعرض تفاصيل الطروحة');
+                return;
+            }
+            
+            try {
+                // جلب تفاصيل الطروحة
+                const { data: offer, error } = await supabaseClient
+                    .from('property_offers')
+                    .select('*')
+                    .eq('id', offerId)
+                    .single();
+                
+                if (error) throw error;
+                
+                if (offer) {
+                    const isHouse = offer.property_type === 'house';
+                    const typeText = isHouse ? 'شقة/منزل' : 'أرض';
+                    const paidCurrency = offer.paid_currency === 'USD' ? 'دولار أمريكي' : 'جنيه مصري';
+                    
+                    // عرض التفاصيل في نافذة منبثقة
+                    const detailsHtml = `
+                        <div style="text-align: right; direction: rtl; padding: 20px;">
+                            <h3 style="color: var(--primary-color); margin-bottom: 15px;">${typeText} في ${offer.governorate}</h3>
+                            
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 15px;">
+                                <div><strong>المساحة:</strong> ${offer.area} م²</div>
+                                <div><strong>نسبة التميز:</strong> ${offer.excellence_percentage}%</div>
+                                ${isHouse ? `
+                                    <div><strong>عدد الحمامات:</strong> ${offer.bathrooms || 0}</div>
+                                    <div><strong>عدد الريسبشن:</strong> ${offer.reception_rooms || 0}</div>
+                                ` : `
+                                    <div><strong>الحي:</strong> ${offer.district || 'غير محدد'}</div>
+                                    <div><strong>المجاورة:</strong> ${offer.neighborhood || 'غير محدد'}</div>
+                                `}
+                                <div><strong>المبلغ المدفوع:</strong> ${new Intl.NumberFormat('ar-EG').format(offer.paid_amount)} ${paidCurrency}</div>
+                                <div><strong>السعر النهائي:</strong> ${new Intl.NumberFormat('ar-EG').format(offer.offer_price_egp)} ج.م</div>
+                            </div>
+                            
+                            ${offer.additional_info ? `<p><strong>معلومات إضافية:</strong><br>${offer.additional_info}</p>` : ''}
+                            
+                            <div style="margin-top: 20px; color: #666; font-size: 0.9em;">
+                                <i class="fas fa-clock"></i> تاريخ الإضافة: ${new Date(offer.created_at).toLocaleDateString('ar-EG')}
+                            </div>
+                        </div>
+                    `;
+                    
+                    // إنشاء نافذة منبثقة
+                    const popup = document.createElement('div');
+                    popup.style.cssText = `
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0,0,0,0.5);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        z-index: 99999;
+                    `;
+                    
+                    const popupContent = document.createElement('div');
+                    popupContent.style.cssText = `
+                        background: white;
+                        padding: 30px;
+                        border-radius: 15px;
+                        max-width: 500px;
+                        width: 90%;
+                        max-height: 80vh;
+                        overflow-y: auto;
+                        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+                        position: relative;
+                    `;
+                    
+                    popupContent.innerHTML = `
+                        <button style="position: absolute; top: 10px; left: 10px; background: none; border: none; font-size: 20px; cursor: pointer;">×</button>
+                        ${detailsHtml}
+                    `;
+                    
+                    popup.appendChild(popupContent);
+                    document.body.appendChild(popup);
+                    
+                    // إضافة حدث إغلاق النافذة
+                    popup.addEventListener('click', function(e) {
+                        if (e.target === popup || e.target.textContent === '×') {
+                            document.body.removeChild(popup);
+                        }
+                    });
+                    
+                    // زر إغلاق
+                    popupContent.querySelector('button').addEventListener('click', function() {
+                        document.body.removeChild(popup);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading offer details:', error);
+                alert('حدث خطأ في تحميل تفاصيل الطروحة');
+            }
+        }
+
+        // التحقق من تسجيل الدخول قبل إضافة طروحة
+        function checkLoginBeforeAddOffer() {
+            if (!currentUser) {
+                // فتح شاشة تسجيل الدخول
+                loginOverlay.classList.add('active');
+                animatedContainer.classList.remove('active');
+                
+                // تخزين الوجهة بعد تسجيل الدخول
+                localStorage.setItem('redirectAfterLogin', 'add-offer');
+                
+                alert('يرجى تسجيل الدخول أولاً لإضافة طروحة جديدة');
+                return false;
+            }
+            
+            // الانتقال لصفحة إضافة طروحة
+            window.location.href = 'offers.html#property-type-section';
+            return true;
+        }
+
+        // ===== تحسين عرض المحافظات =====
+        const originalSelect = document.getElementById('city');
+        const citySelect = document.getElementById('citySelect');
+        const cityBtn = document.getElementById('cityBtn');
+        const cityDropdown = document.getElementById('cityDropdown');
+        const cityGrid = document.getElementById('cityGrid');
+        const citySearch = document.getElementById('citySearch');
+        const cityBtnText = document.getElementById('cityBtnText');
+        const neighborhoodGroup = document.getElementById('neighborhoodGroup');
+        const neighborhoodSelect = document.getElementById('neighborhood');
+
+        // خريطة الأحياء لكل محافظة
+        const neighborhoodsMap = {
+            'كل المحافظات': {},
+            'السادات': {
+                'المنطقة الذهبية': ['14', '22', '21', '29'],
+                'الحي المتميز': [],
+                'بيت الوطن': [],
+                'أحياء حكومية/سكنية قديمة': ['المنطقة الأولى', 'المنطقة الثانية', 'المنطقة الرابعة', 'المنطقة الحادية عشرة'],
+                'أحياء أخرى': ['حي الفردوس', 'حي النخيل', 'حي النرجس', 'حي الكوثر']
+            },
+            'أكتوبر الجديدة': {'الحي الأول': [], 'الحي الثاني': [], 'الحي الثالث': []},
+            'أسوان الجديدة': {'المنطقة الأولى': [], 'المنطقة الثانية': [], 'الحي السياحي': []},
+            '15 مايو': {'الحي الأول': [], 'الحي الثاني': [], 'المنطقة الصناعية': []},
+            'العبور الجديدة': {'المنطقة A': [], 'المنطقة B': [], 'المنطقة C': []},
+            'العاشر من رمضان': {'الحي الأول': [], 'الحي الثاني': [], 'الحي الثالث': [], 'المناطق الصناعية': []},
+            'الشروق': {'الشروق - الحي الأول': [], 'الشروق - الحي الثاني': [], 'الحي التجاري': []},
+            'السادس من أكتوبر': {'الحي الأول': [], 'الحى السابع': [], 'مدينة 6 أكتوبر - منطقة عباس': [], 'التجمع الخامس (قريب)': []},
+            'بدر': {'الحي الأول': [], 'الحي الثاني': []},
+            'المنيا الجديدة': {'القطاعات السكنية 1': [], 'القطاعات السكنية 2': []},
+            'المنصورة الجديدة': {'المنطقة السكنية A': [], 'المنطقة السكنية B': []},
+            'العلمين الجديدة': {'المنطقة الساحلية': [], 'المنطقة السكنية': []},
+            'سفنكس الجديدة': {'الحي الأول': [], 'الحي الثاني': []},
+            'دمياط الجديدة': {'المنطقة السكنية': [], 'المنطقة الصناعية': []},
+            'بني سويف الجديدة': {'الحي الأول': [], 'الحي الثاني': []},
+            'برج العرب الجديدة': {'المنطقة السكنية': [], 'المنطقة الصناعية': []},
+            'ناصر الجديدة - غرب اسوان': {'الحي الأول': [], 'الحي الثاني': []},
+            'قنا الجديدة': {'الحي الأول': [], 'الحي الثاني': []},
+            'سوهاج الجديدة': {'الحي الأول': [], 'الحي الثاني': []},
+            'التجمع': {'التجمع الخامس': [], 'التجمع الثالث': [], 'التجمع الأول': []},
+            'الإسكندرية': {'كل الأحياء': [], 'سموحة': [], 'ستانلي': [], 'سيدى جابر': [], 'العجمي': [], 'المنتزه': [], 'وسط المدينة': []},
+            'الإسماعيلية': {'كل الأحياء': [], 'فايد': [], 'القنطرة شرق': [], 'القنطرة غرب': []},
+            'أسوان': {'كل الأحياء': [], 'جبل سلع': [], 'الكورنيش': [], 'النوبة': []},
+            'أسيوط': {'كل الأحياء': [], 'أسيوط الجديدة': [], 'المنفلوطي': [], 'ديروط': []},
+            'الأقصر': {'كل الأحياء': [], 'حي الكرنك': [], 'الطود': [], 'القرنة': []},
+            'البحر الأحمر': {'الغردقة': [], 'مرسى علم': [], 'القصير': [], 'الشرم': []},
+            'البحيرة': {'دمنهور': [], 'كفر الدوار': [], 'رشيد': [], 'إدكو': []},
+            'بني سويف': {'بنى سويف': [], 'الواسطى': [], 'ناصر': [], 'ببا': [], 'الفشن': []},
+            'بورسعيد': {'الحي القديم': [], 'الضواحى': [], 'الجنوب': [], 'الشرق': []},
+            'جنوب سيناء': {'شرم الشيخ': [], 'دهب': [], 'نويبع': [], 'طابا': []},
+            'الجيزة': {'الهرم': [], 'الدقى': [], 'الشيخ زايد': [], 'الجيزة': [], 'الهرم - مناطق التوسعة': []},
+            'الدقهلية': {'المنصورة': [], 'طلخا': [], 'ميت غمر': [], 'بلقاس': [], 'دكرنس': []},
+            'دمياط': {'دمياط': [], 'دمياط الجديدة': [], 'فارسكور': [], 'السوكري': []},
+            'سوهاج': {'سوهاج': [], 'أخميم': [], 'البلينا': [], 'جرجا': []},
+            'السويس': {'السويس - الحي الأول': [], 'السويس - الحي الثاني': [], 'الزراعى': []},
+            'الشرقية': {'الزقازيق': [], 'القصاصين': [], 'بلبيس': [], 'فاقوس': [], 'منيا القمح': []},
+            'شمال سيناء': {'العريش': [], 'الشيخ زويد': [], 'رفح': []},
+            'الغربية': {'طنطا': [], 'المحلة الكبرى': [], 'كفر الزيات': [], 'زفتى': []},
+            'الفيوم': {'الفيوم': [], 'طامية': [], 'سنورس': [], 'إطسا': []},
+            'القاهرة': {'كل الأحياء': [], 'وسط المدينة': [], 'الزمالك': [], 'المعادي': [], 'مدينة نصر': [], 'المقطم': [], 'حلوان': [], 'المعصرة': [], 'السلام': []},
+            'القليوبية': {'شبرا الخيمة': [], 'بنها': [], 'قها': [], 'القناطر الخيرية': [], 'الخانكة': []},
+            'قنا': {'قنا': [], 'دشنا': [], 'نقادة': [], 'قفط': []},
+            'كفر الشيخ': {'كفر الشيخ': [], 'دسوق': [], 'بلطيم': [], 'مطوبس': [], 'بيلا': []},
+            'مطروح': {'مرسى مطروح': [], 'الحمام': [], 'النجيلة': [], 'الضبعة': []},
+            'المنوفية': {'شبين الكوم': [], 'مدينة السادات': [], 'منوف': [], 'قويسنا': []},
+            'المنيا': {'المنيا': [], 'مركز المنيا': [], 'مطاي': [], 'ملوي': []},
+            'الوادي الجديد': {'الخارجة': [], 'باريس': [], 'الفرافرة': [], 'بلاط': []}
+        };
+
+        // ملء قائمة المحافظات
+        function populateCities() {
+            cityGrid.innerHTML = '';
+            Array.from(originalSelect.options).forEach(opt => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'city-item';
+                btn.textContent = opt.textContent;
+                btn.dataset.value = opt.textContent;
+                if (opt.selected) btn.classList.add('active');
+                btn.addEventListener('click', () => {
+                    for (let i = 0; i < originalSelect.options.length; i++) {
+                        if (originalSelect.options[i].text === btn.dataset.value) {
+                            originalSelect.selectedIndex = i;
+                            break;
+                        }
+                    }
+                    originalSelect.dispatchEvent(new Event('change'));
+                    cityBtnText.textContent = btn.dataset.value;
                     cityDropdown.classList.remove('open');
                     cityDropdown.setAttribute('aria-hidden', 'true');
+                    cityGrid.querySelectorAll('.city-item').forEach(ci => ci.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+                cityGrid.appendChild(btn);
+            });
+        }
+
+        populateCities();
+
+        // ملء الأحياء بناءً على المحافظة المختارة
+        function populateNeighborhoods(cityName) {
+            neighborhoodSelect.innerHTML = '';
+            const data = neighborhoodsMap[cityName];
+            if (!data) {
+                neighborhoodSelect.innerHTML = '<option>لا توجد بيانات أحياء لهذه المحافظة</option>';
+                neighborhoodGroup.classList.remove('show');
+                return;
+            }
+
+            const neighborhoodsObj = Array.isArray(data) ? Object.fromEntries(data.map(n => [n, []])) : data;
+
+            Object.keys(neighborhoodsObj).forEach(neighborhood => {
+                const areas = neighborhoodsObj[neighborhood];
+                if (areas.length > 0) {
+                    const optgroup = document.createElement('optgroup');
+                    optgroup.label = neighborhood;
+                    areas.forEach(area => {
+                        const o = document.createElement('option');
+                        o.textContent = area;
+                        o.value = `${neighborhood}|${area}`;
+                        optgroup.appendChild(o);
+                    });
+                    neighborhoodSelect.appendChild(optgroup);
+                } else {
+                    const o = document.createElement('option');
+                    o.textContent = neighborhood;
+                    o.value = neighborhood;
+                    neighborhoodSelect.appendChild(o);
                 }
             });
 
-            // إعادة تعيين عند مسح الفلاتر
-            const clearFiltersBtn2 = document.querySelector('.btn-secondary');
-            if (clearFiltersBtn2 && clearFiltersBtn2.textContent.includes('مسح الفلاتر')) {
-                clearFiltersBtn2.addEventListener('click', function() {
-                    neighborhoodGroup.classList.remove('show');
-                    neighborhoodSelect.innerHTML = '<option>اختر المحافظة أولاً</option>';
-                    cityBtnText.textContent = 'كل المحافظات';
-                    originalSelect.selectedIndex = 0;
-                    cityGrid.querySelectorAll('.city-item').forEach(ci => ci.classList.remove('active'));
-                });
-            }
+            neighborhoodGroup.classList.add('show');
+        }
 
-            // تشغيل مبدئي
-            if (originalSelect.selectedIndex > 0) {
-                originalSelect.dispatchEvent(new Event('change'));
+        // حماية الوظائف التي تتطلب تسجيل دخول
+        function protectFunction(callback) {
+            if (window.authSystem && window.authSystem.isLoggedIn()) {
+                callback();
+            } else {
+                alert('يرجى تسجيل الدخول للوصول إلى هذه الميزة');
+                if (window.authSystem) {
+                    window.authSystem.showLoginModal();
+                }
+                // حفظ الصفحة الحالية للعودة إليها بعد تسجيل الدخول
+                localStorage.setItem('redirectAfterLogin', window.location.href);
             }
+        }
 
-            // ===== نسيت كلمة المرور =====
-            document.getElementById('forgotPassword')?.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('سيتم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني');
+        // استخدام المثال:
+        document.querySelector('.add-offer-btn')?.addEventListener('click', function() {
+            protectFunction(function() {
+                // الكود الذي يتطلب تسجيل دخول
+                window.location.href = 'add-house.html';
             });
         });
+
+        // عند تغيير المحافظة
+        originalSelect.addEventListener('change', function() {
+            const sel = originalSelect.options[originalSelect.selectedIndex].text;
+            if (sel === 'كل المحافظات') {
+                neighborhoodGroup.classList.remove('show');
+                neighborhoodSelect.innerHTML = '<option>اختر المحافظة أولاً</option>';
+            } else {
+                populateNeighborhoods(sel);
+            }
+            const activeGridItem = cityGrid.querySelector(`.city-item[data-value="${sel}"]`);
+            if (activeGridItem) {
+                cityGrid.querySelectorAll('.city-item').forEach(ci => ci.classList.remove('active'));
+                activeGridItem.classList.add('active');
+                cityBtnText.textContent = sel;
+            }
+        });
+
+        // فتح/إغلاق قائمة المحافظات
+        cityBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            cityDropdown.classList.toggle('open');
+            cityDropdown.setAttribute('aria-hidden', !cityDropdown.classList.contains('open'));
+            if (cityDropdown.classList.contains('open')) citySearch.focus();
+        });
+
+        // البحث في المحافظات
+        citySearch.addEventListener('input', function() {
+            const q = citySearch.value.trim().toLowerCase();
+            cityGrid.querySelectorAll('.city-item').forEach(it => {
+                const txt = it.textContent.trim().toLowerCase();
+                it.style.display = txt.includes(q) ? '' : 'none';
+            });
+        });
+
+        // إغلاق القائمة عند النقر خارجها
+        document.addEventListener('click', function(e) {
+            if (!citySelect.contains(e.target) && cityDropdown.classList.contains('open')) {
+                cityDropdown.classList.remove('open');
+                cityDropdown.setAttribute('aria-hidden', 'true');
+            }
+        });
+
+        // ===== إضافة مستمعين للأحداث =====
+        document.getElementById('addOfferBtnMain')?.addEventListener('click', function() {
+            checkLoginBeforeAddOffer();
+        });
+
+        // تحديث زر "أضف عقارك" في الهيدر
+        const addPropertyLink = document.querySelector('.main-nav a[href="#"] i.fa-plus-circle')?.closest('a');
+        if (addPropertyLink) {
+            addPropertyLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                checkLoginBeforeAddOffer();
+            });
+        }
+
+        // تحميل الجلسة والعروض عند فتح الصفحة
+        loadUserSession().then(() => {
+            loadFeaturedOffers();
+            
+            // التحقق إذا كان المستخدم قد سجل الدخول للتو
+            const redirectAfterLogin = localStorage.getItem('redirectAfterLogin');
+            if (redirectAfterLogin === 'add-offer') {
+                localStorage.removeItem('redirectAfterLogin');
+                window.location.href = 'offers.html#property-type-section';
+            }
+        });
+    });
+    </script>
+        <!-- ملف إدارة المصادقة المشترك -->
+    <script src="js/auth.js"></script>
+
+    <script>
+    // استخدم نظام المصادقة في صفحة الرئيسية
+    document.addEventListener('DOMContentLoaded', function() {
+        // تحديث واجهة المستخدم بناءً على حالة تسجيل الدخول
+        if (window.authSystem) {
+            window.authSystem.initializeAuth().then(() => {
+                // بعد تحميل حالة المستخدم، قم بتحميل الطروحات
+                if (window.authSystem.isLoggedIn()) {
+                    loadFeaturedOffers();
+                }
+            });
+        }
+        
+        // ربط أزرار تسجيل الدخول والخروج
+        document.getElementById('loginHeaderBtn')?.addEventListener('click', function() {
+            if (window.authSystem) {
+                window.authSystem.showLoginModal();
+            }
+        });
+        
+        document.getElementById('logoutBtn')?.addEventListener('click', async function() {
+            if (window.authSystem) {
+                await window.authSystem.logout();
+                // إعادة تحميل الطروحات بعد تسجيل الخروج
+                loadFeaturedOffers();
+            }
+        });
+    });
     </script>
 </body>
 </html>
